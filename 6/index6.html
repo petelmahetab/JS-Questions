@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Q 6 || List Bubbling</title>
+</head>
+<body>
+    
+    <!-- Q 6. Same List Bubbling -->
+    <div style="display: flex;justify-content:space-between;">
+    <ul id="parent">
+<li>Abstract</li>
+<li>Boolean</li>
+<li>Canvas</li>
+</ul>
+
+</div>
+    <!-- Script -->
+    <script>
+        const urUl=document.querySelector("#parent");
+        //listener
+        const div=document.createElement("div");
+       
+        div.style.marginTop="10%";
+        document.body.appendChild(div);
+        urUl.addEventListener('click',(e)=>{
+            let clickedList=e.target;
+            if(clickedList.tagName==='LI'){
+               div.textContent="List is Clicked"
+            }else{
+                div.textContent="Other Clicked"
+            }
+        })
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Q12 || Object Destructuring</title>
+</head>
+<body>
+    <!-- //1. for Object Destructuring 
+        const obj={
+            name:"Mahetab",
+            lastName:"patel",
+            profession:"Billionaire",
+            age:"28",
+            height:"5 '10",
+        }
+        const {name,lastName,profession,...remain}=obj;
+        console.log(name);
+        console.log(profession);
+        console.log(lastName);
+        console.log(remain); -->
+    <script>
+        class Book{
+            constructor(title,author,year){
+            this.title=title;
+            this.author=author;
+            this.year=year
+            }
+
+            //Method For Return the how many year have been done for book publication 
+            getYear(){
+                const currentYear = new Date().getFullYear();
+                return currentYear-this.year
+            }
+        }
+  
+       const detail= new Book("To Kill a Mockingbird","Harper Lee",1960);  
+       console.log(`It has been  ${detail.getYear()} year since that book was published. `);
+    </script>
+    
+</body>
+</html>

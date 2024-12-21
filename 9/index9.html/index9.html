@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Random Motivational || Quotes Generator </title>
+</head>
+
+<body style="background-color: black;color:white;">
+
+    <h1 style="text-align: center;">Motivational Quotes</h1>
+    <div class="Display" >Loading....</div>
+    <script>
+        const funnyQuotes = [
+            "I'm not lazy, I'm just on energy-saving mode.",
+            "Why don’t skeletons fight each other? They don’t have the guts.",
+            "I told my computer I needed a break, and it said 'No problem, I’ll go to sleep.'",
+            "Parallel lines have so much in common. It’s a shame they’ll never meet.",
+            "I'm on a seafood diet. I see food and I eat it.",
+            "Debugging is like being a detective in a crime movie where you are also the murderer.",
+            "Why don’t programmers like nature? Too many bugs.",
+            "I would lose weight, but I hate losing.",
+            "I used to play piano by ear, but now I use my hands.",
+            "Why did the scarecrow win an award? Because he was outstanding in his field!",
+            "I tried to catch fog yesterday. Mist.",
+            "Life’s too short to remove USB safely.",
+            "I told my Wi-Fi we were breaking up, and it said, 'I’m sorry you feel that way, but you’ll have no connection.'",
+            "I used to be indecisive. Now I’m not sure.",
+            "The elevator to success is broken. Take the stairs, one step at a time."
+        ];
+
+
+        //1.Create Function for display Random QUOTES
+         function displayQuotes(){
+             const quotesDisplay=document.querySelector('.Display');
+             quotesDisplay.style.fontSize="5vw"
+             quotesDisplay.style.marginTop="150px"
+             quotesDisplay.style.marginLeft="150px"
+             quotesDisplay.style.color="Red"
+             const generateRandom=Math.floor(Math.random()*funnyQuotes.length);
+             quotesDisplay.textContent=funnyQuotes[generateRandom];
+         }
+displayQuotes();
+         //2.Change the Quotes Every 1 seconds using SETINTERVAL
+         setInterval(displayQuotes,5000)
+    </script>
+</body>
+
+</html>
