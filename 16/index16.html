@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Q 16 || Advanced JS Question</title>
+</head>
+<body style="background-color: rgb(19, 18, 18); color:white">
+    <h3 style="font-size:25px;">Question 16.</h3>
+    <h5 style="font-size:20px;">
+        Create a function to get an array of objects for a grocery list and calculate the total price by multiplying the quantity and price of each item.
+    </h5>
+    <h5>Solution -> </h5>
+    <h6 style="font-size: large;">
+        Step 1: Create a function that takes an array of objects containing Item, Quantity, and Price.<br>
+        Step 2: Iterate over the objects using a loop to extract Quantity and Price.<br>
+        Step 3: Calculate the total price for all items.
+    </h6>
+    <h3>For the solution, check the console...</h3>
+    <script>
+        // Function to calculate the total price of grocery items
+        function calculateTotalPrice(items) {
+            let totalPrice = 0;
+
+            // Iterate through each item in the array
+            for (let item of items) {
+                // Extract numeric values for Quantity and price
+                let quantity = parseFloat(item.Quantity); // Remove 'L.' or any other unit
+                let price = parseFloat(item.price); // Ensure price is a number
+
+                // Add the product of quantity and price to the total
+                totalPrice += quantity * price;
+            }
+
+            return totalPrice;
+        }
+
+        // Array of grocery items
+        const groceryList = [
+            { milk: "Cow", Quantity: "10", price: "500" },
+            { milk: "Goat", Quantity: "5", price: "200" },
+            { milk: "Camel", Quantity: "8", price: "450" }
+        ];
+
+        // Output the total price
+        console.log(`the Product is ${calculateTotalPrice(groceryList)}`);
+    </script>
+</body>
+</html>
