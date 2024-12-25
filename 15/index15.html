@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Q 15 || Advance Js Question</title>
+</head>
+<body style="background-color: rgb(19, 18, 18); color:white">
+    <h3>Question 15.</h3>
+    <h5>Create an Function to reverse the Given string which have only for ODD.
+        which means the given certain string length is ODD then we have to reverse only that string only not for Even number of string length.
+    </h5>
+    <h5>Solution -> </h5>
+    <h6>
+        step 1: we have split that string into word till from the spaces right for calculating the length of the word in the string.
+        step 2: Apply the loop on that word and check the length of that word is ODD then reverse and if not length is odd then Not reverse the String.
+    </h6>
+    <h3> For the Solution check in Console...</h3>
+    <script>
+
+        //1.Function for reverseOddString Only
+        function reverseOddString(str){
+  //create function for reverse
+    function reverseALl(str){
+        return str.split('').reverse().join('');
+    }
+    let word=str.split(' ');
+    for(let i=0;i<word.length;i++){
+        if(word[i].length %2 !==0){
+            word[i]=" "+reverseALl(word[i]);
+        }
+        
+    }
+    return word.join('');
+        }
+        console.log(reverseOddString("hello i am the greater.!"));
+    </script>
+</body>
+</html>
