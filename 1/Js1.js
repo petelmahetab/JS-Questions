@@ -3,7 +3,7 @@
 const imgeDiv=document.querySelector('.Image-Container');
 const arrayURLImges=["https://picsum.photos/200/300?random=1","https://picsum.photos/200/300?random=2","https://picsum.photos/200/300?random=3","https://picsum.photos/200/300?random=6","https://picsum.photos/200/300?random=5"];
 
-//lets handle all URL using PROMISE.all Method
+//Lets handle all URL using PROMISE.all Method
 //Here..Handle Images is the Function for handling the Promises.
 Promise.all(arrayURLImges.map(HandleImages))
 .then((img)=>{

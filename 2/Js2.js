@@ -22,7 +22,7 @@ async function handleYourImges() {
 }
 
 // Helper function for loading an image
-function loadedImage(src) { // Correct function name
+function loadedImage(src) { //
     return new Promise((res, rej) => {
         let img = new Image(300, 300); // Create a new image
         img.onload = function () {
