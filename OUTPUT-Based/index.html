@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Document</title>
+</head>
+<body style="background-color: black;">
+    
+    <script>
+       //1.Guess the Output
+
+var myObj={
+    foo:'baar',
+    fun:function(){
+        var self=this;
+        console.log('Outer Func'+this.foo);
+        console.log('Outer Func'+self.foo);
+        (function(){
+            console.log('Inner Func'+this.foo);
+            console.log('Inner Func'+self.foo);
+        }())
+    }
+}
+//Har bar Json me if value not present then we get "Undefined"
+//Object lexical scope me nhi hoga Naam ho skata hai per Object nhi hoga
+
+///baar
+//baar
+//undefind 'this'=>global aur is code me dusra global me foo nhi hai isliye
+//baar => self refer kar raha hai myObj context ko and value return karega
+
+
+//closure
+
+
+
+
+    </script>
+</body>
+</html>
