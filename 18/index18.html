@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Q 18 || Advanced JS Question</title>
+</head>
+
+<body style="background-color: rgb(19, 18, 18); color:white">
+    <h3 style="font-size:25px;">Question 16.</h3>
+    <h5 style="font-size:20px;">
+        .!"
+    </h5>
+    <h5>Solution -> </h5>
+    <h6 style="font-size: large;">
+        Step 1: Var and Let differentiate between them.<br>
+        Step 2: Iterate over the loop check the Out-put using a loop.<br>
+        Step 3: When we define any variable using  var ,let then var is functional and let will be Block scope.
+        a.Var will not update value of i on each itration like 9,9,9...9.It will take only single value after the loop ends as the till the last.
+        b.Let will be update value of i on each itration like 0,1,2....9 .It will take only single value after the loop ends as the till the last
+    </h6>
+    <h3>For the solution, check the console...</h3>
+    <script>
+        //.Using Var
+
+var a=[]
+
+for(var i=0;i<10;i++){
+    a.push(function (){
+        setTimeout(function(){
+            console.log(i)
+        },1000)
+    })
+}
+
+
+for(var i=0;i<10;i++){
+    a[i]()
+} //10 ,10,10,10,10,10....10 times 
+//VAR functional scope hota hai aur har iteration, It will take as common value after loop ends and in reverse in Let case it will print new variable associated with that 0,1,2,3,...9
+
+      
+    </script>
+</body>
+
+</html>

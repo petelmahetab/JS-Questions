@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Q 13 || Evenish and Oddish</title>
+</head>
+<body style="background-color: black;">
+    
+    <!-- Question 13 
+        We have given number check that number is evenish or oddish like 53=>5+3=>8 and 8 is even so it is Evenish. 
+        or oddish on console
+     -->
+     <script>
+         //1.Function for the Evenish cheking
+         function checkEvenish(num){
+            //a. firstly can divide that number into string which help me add letter and convert into String
+            //map(Number) will map that splitted string number to Number.
+            const splitedNum=num.toString().split('').map(Number);
+            //b. after getting the splitted the number we need to add that number using reduce
+            const addedNum=splitedNum.reduce((ac,num)=>ac+num,0);
+
+            return addedNum % 2==0 ? "Evenish":"Oddish";
+         }
+
+         console.log(checkEvenish(53));;
+     </script>
+</body>
+</html>

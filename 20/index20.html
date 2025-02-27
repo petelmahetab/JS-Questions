@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Q 20 || Advanced JS Question</title>
+</head>
+
+<body style="background-color: rgb(19, 18, 18); color:white">
+    <h3 style="font-size:25px;">Question 16.</h3>
+    <h5 style="font-size:20px;">
+        Create a function that takes string as Arguments & that fucntion must return string a containing 1s,0s based on
+        String arguments in words. If word not equal to 'zero' or 'one' (case Insensitive) you should ingore that.
+        The Returned string length should be multiple of 8,if the String is not a multiple of 8 you should remove the
+        numbers in excess.
+    </h5>
+    <h5>Solution -> </h5>
+    <h6 style="font-size: large;">
+        Step 1: Check the given input is ARRAY or not /(instanceof and input.constructor) is Equal to Array<br>
+        Step 2:Clone the Array element using Both Shallow & Deep Copy .In Shallow copy some changes done in nested
+        element then it will reflect on Parent BUT in Deep not like That (StructuredClone () for Deep copy only.) .<br>
+        Step 3: Create An function which take 2 para .
+        a.First para is arr then return an first Index (para ==undefined -> first Index)
+        b.Second Para will be undefined then we will get (length ==0 -> return empty)
+        c.both Are there then Splice(from 0 to given 2 number as para)
+
+        Question 4 :We have to create an function like that if given input is an array then combine elements inside that
+        using JOIN and if not array then return Empty Array
+    </h6>
+    <h3>For the solution, check the console...</h3>
+    <script>
+
+        //function processBinaryString(input) {
+        // Step 1: Split the input string into words
+        //     const words = input.split(" ");
+
+        // Step 2: Filter and convert words to binary
+        //const binaryArray = words.map(word => {
+        //const lowerCaseWord = word.toLowerCase();
+        //if (lowerCaseWord === "zero") return "0";
+        //if (lowerCaseWord === "one") return "1";
+        //  return ""; // Ignore other words
+        //}).join(""); // Join to form a binary string
+
+        // Step 3: Ensure the result length is a multiple of 8
+        //const length = binaryArray.length;
+        //const multipleOfEightLength = Math.floor(length / 8) * 8;
+        //const finalBinaryString = binaryArray.slice(0, multipleOfEightLength);
+
+        // Step 4: Return the processed binary string
+        //  return finalBinaryString;
+        //}
+
+        // Example usage:
+        //console.log(processBinaryString("One Zero Zero One Two Zero Zero One Zero")); // Output: "10010010"
+        //console.log(processBinaryString("One Zero Zero One Zero Zero Zero Zero Zero")); // Output: "10010000"
+
+
+
+        // We have string contain Uppercase alphabets then convert into vice VERSA    //i/p:-> JcobMartin   o/p:->jCOBmARTIN
+// We have string contain Uppercase alphabets then convert into vice VERSA    //i/p:-> JcobMartin   o/p:->jCOBmARTIN
+
+        /* function updatedString(str) {
+
+            let updated = '';
+            for (let i of str) {
+
+                if (i >= 'a' && i <= 'z') {
+                    updated += i.toUpperCase();
+                }
+                else if (i >= 'A' && i <= 'Z') {
+                    updated += i.toLowerCase();
+                } else {
+                    updated += i;
+                }
+            }
+            return updated;
+        }
+
+        let string = 'JcobMartin'
+        console.log(updatedString(string)) -->*/
+
+
+        //We have to , return index if contain first and last element.
+      /* 
+        function returnIndeces(ar){
+   let firstIndex=-1,lastIndex=-1;
+
+   for(let i=0;i<=ar.length;i++){
+       if(ar[i] ===10){
+           if(firstIndex===-1){
+               firstIndex=i;
+           }
+           lastIndex=i;
+       }
+   }
+   console.log(firstIndex)
+   console.log(lastIndex)
+        }
+
+        const ar=[10,2,45,30,10,20,10,10,2]
+        console.log(returnIndeces(ar))  */
+
+
+        /*We have to return an Matrix as Wave Fromat to given Matrix ..*/
+  /*
+        function waveMatrix(arr){
+            const row=arr.length;
+            const col=arr[0].length;
+
+            for(let i=0;i<col;i++){
+                if(i%2 === 0){
+                    for(let j=0;j<row;j++){
+                        process.stdout.write(arr[j][i]+' ')
+                    }
+                }else{
+                    for(let j=row-1;j>0;j--){
+                        process.stdout.write(arr[j][i]+' ')
+                    }
+                }
+            }
+            console.log()
+        }
+        
+        let arr=[[11,12,13],[14,15,16],[17,18,19]];
+        waveMatrix(arr)    */
+        
+        //We have to return how many Vowels,consonents and other charcter in given string
+        function returnCharacters(str){
+            let vo=0,cons=0,other=0;
+      
+            str=str.toLowerCase();
+        for(let ch of str){
+            if("aeiou".includes(ch)){
+                vo++;
+            }else if(ch >='a' && ch <= 'z'){
+                cons++;
+            }else{
+                other++;
+            }
+        }
+        console.log(vo)
+      console.log(cons)
+      console.log(other)
+       }
+              const str="hello world"
+              returnCharacters(str)
+    </script>
+</body>
+
+</html>

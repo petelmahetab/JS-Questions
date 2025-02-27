@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Q 18 || Advanced JS Question</title>
+</head>
+
+<body style="background-color: rgb(19, 18, 18); color:white">
+    <h3 style="font-size:25px;">Question 16.</h3>
+    <h5 style="font-size:20px;">
+        I am going to Solve the Some question on Array!"
+    </h5>
+    <h5>Solution -> </h5>
+    <h6 style="font-size: large;">
+        Question 1: Check the given input is ARRAY or not /(instanceof and input.constructor) is Equal to Array<br>
+        Question 2:Clone the Array element using Both Shallow & Deep Copy .In Shallow copy some changes done in nested element then it will reflect on Parent BUT in Deep not like That (StructuredClone () for Deep copy only.) .<br>
+        Question 3: Create An function which take 2 para . 
+        a.First para is arr then return an first Index (para ==undefined -> first Index)
+        b.Second Para will be undefined then we will get  (length ==0 -> return empty)
+        c.both Are there then Splice(from 0 to given 2 number as para)
+
+        Question 4 :We have to create an function like that if given input is an array then combine elements inside that using JOIN and if not array then return Empty Array
+     </h6>
+    <h3>For the solution, check the console...</h3>
+    <script>
+       // 1.Check type of ARRAY or not
+// function checkArry(inp){
+//     return inp && inp.constructor === Array
+// return inp intanceof Array
+// }
+
+// console.log(checkArry(1,2))
+
+// 2.Function to clone an Array.
+// function cloneArr(inp){
+//     let newAr=[...inp]
+//     return newAr
+// }
+//Shallow Copy and DeepCopy
+// const ar=[1,2,3,[5,6],7]
+// const ar1=[...ar]
+// // ar1[3][1]=60
+// console.log(ar1)
+
+
+// 3.Function for return An output as like that
+// //Case 1:If length of arr=0 then return empty,if number undefined toh ar[0] aur agar hai 2 parameter toh splice
+// function customFunction(arr,num){
+//     if(arr.length === 0)
+//     {
+//         return [];
+//     }else if(num === undefined){
+//         return arr[0];
+//     }else{
+//         return arr.splice(0,num)
+//     }
+// } 
+// console.log(customFunction([1, 2, 3, 4]));      // Output: 1
+// console.log(customFunction([1, 2, 3, 4], 3));   // Output: [1, 2, 3]
+// console.log(customFunction([], 0));              // Output: []
+// console.log(customFunction([1, 2, 3, 4], 2));   // Output: [1, 2]
+
+
+
+
+// // 4.We have array which contain list of Color's and output will be combination of all into as string
+
+// function returnOutput(mycolor){
+//   let arrCheck=mycolor instanceof Array;
+//   if(!arrCheck){
+//       return [];
+//   }else{
+//     //   let string=mycolor.toString('');
+      
+//       return mycolor.join('+');
+//   }
+// }
+// let myColor=['white','red','black','green','yellow'] 
+// // let myColor='string'
+// console.log(returnOutput(myColor)) //white+red+black+green+yellow
+
+
+
+
+
+
+      
+    </script>
+</body>
+
+</html>

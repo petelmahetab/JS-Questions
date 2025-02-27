@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Q 17 || Advanced JS Question</title>
+</head>
+
+<body style="background-color: rgb(19, 18, 18); color:white">
+    <h3 style="font-size:25px;">Question 16.</h3>
+    <h5 style="font-size:20px;">
+        Create a function that takes an array and another arguments for then total how many numbers should be printed
+        from this Array.. If no 2 argument is there then print First element in given Array.Else print no element that
+        provided in 2 arguments.
+    </h5>
+    <h5>Solution -> </h5>
+    <h6 style="font-size: large;">
+        Step 1:Here , We are going to use Default value concept right.<br>
+        Step 2: Loop for iterate on Array and run only till the time only..<br>
+        Step 3: If 2 length is greater than array length return 'You were Exceed limit'.
+    </h6>
+    <h3>For the solution, check the console...</h3>
+    <script>
+        //This is for the getting element from Starting
+        /* function getElementStarting(arr, n = 1) {
+            //Return only element is lesser than the n. value from the Array.
+        if(n <=arr.length){
+            for(let i=0;i<=n-1;i++){
+                console.log(arr[i]);
+               
+            }
+        }
+        else{
+            return `You were Exeed Limit. Array contains ${arr.length} elements Only.`;
+        }
+
+        }
+        console.log(getElementStarting([1, 2, 3, 4, 5, 6],50)); */
+
+
+        //This is for the getting element from Last
+        /*function getElementLast(arr, n= 1) {
+            //Return only element is lesser than the n. value from the Array.
+           if(n <= arr.length){
+               let result=[];
+               for(let i=0;i<n;i++){
+                   result.push(arr[arr.length-1-i])
+               }
+               return result;
+           }
+           else{
+               return `You have Exceed the limit . Array contain only ${arr.length} elements.`
+           }
+
+        }
+        console.log(getElementLast([1, 2, 3, 4, 5, 6],52)); */
+
+        
+        
+        // Count frequency or num of Occurence given array and return Maximum One..
+
+        function countOccurence(arr){
+                var obj={};
+              arr.forEach((ele)=>{
+                  if(obj.hasOwnProperty(ele))
+                  {obj[ele]++}
+                  else{
+                      obj[ele]=1;
+                  }
+              })
+              //We extract the keys from the Objects
+
+              
+             var ans= Object.keys(obj).map(Number).reduce((acc,num)=> obj[acc] > obj[num] ?acc : num);
+
+              return ans;
+        }
+        console.log(countOccurence([1,2,3,1,5,7,1,6,8,1]));
+    </script>
+</body>
+</html>

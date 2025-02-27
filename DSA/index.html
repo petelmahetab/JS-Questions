@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> DSA via JS </title>
+</head>
+
+<body style="background-color: rgb(19, 18, 18); color:white">
+    <h3 style="font-size:25px;">Question 22.</h3>
+    <h5 style="font-size:20px;">
+        We have to solve 2 question's form that.
+        5 DSA
+        1 Question STOCK and SELL problem
+    <h5>Solution -> </h5>
+    <h6 style="font-size: large;">
+    </h6>
+    <h3>For the solution, check the console...</h3>
+    <script>
+        //Here  We have list of prices array we need to sell the stock for getting maxProfit.
+      function returnMaxPro(arr){
+          let min=Infinity;
+          let maxProfit=0;
+          for(let i  of arr){
+             if(i < min){
+                 min=i;
+             }else{
+                 maxProfit=Math.max(maxProfit,i-min);
+             }
+          }
+          return maxProfit;
+      }
+        let arr=[5,1,2,6,3,8,10,5];
+console.log(returnMaxPro(arr));
+
+//Return Duplicates elements in ARRAY
+/*function getDuplicates(arr){
+    let map=new Map();
+    let duplicates=[];
+
+    for(let i of arr){
+        map.set(i,(map.get(i) || 0) +1);
+    }
+
+    for(let [key,value] of map){
+       if(value > 1)
+       { duplicates.push(key);}
+    }
+    return duplicates;
+}
+  let ar=[1,2,8,9,1,2,6,8,6,4,2,1,6,3];
+  console.log('Duplicates Array ',getDuplicates(ar));
+*/
+function getDuplicateThroughSet(ar){
+    let trackUnique=new Set();
+    let duplicate=new Set();
+    for(let i of ar){
+        if(trackUnique.has(i)){
+            duplicate.add(i);
+        }else{
+            trackUnique.add(i);
+        }
+    }
+    return [...duplicate];
+}
+let Ar=[1,2,5,63,8,9,3,1,6,3,5,2,5,4,1,36,9,4,3,6];
+console.log(getDuplicateThroughSet(Ar));
+    </script>
+</body>
+
+</html>

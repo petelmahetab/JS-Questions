@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Js 3 || Question</title>
+</head>
+<body>
+    
+    <!-- Create an function for creating an Gallery using Dyanamically Generated Elements. -->
+
+    <div class="container" style="background-color:black;display: flex;justify-content:center; gap:10px;height:100vh;align-items:center; width:100vw"></div>
+
+    <script>
+
+        //I'm create function with src of image
+        function dynamicGeneratedImages(src){
+            //create an image image element and append to the random Urls of images which was stored in Array.
+            let img=document.createElement('img');
+            img.src=src;
+            //src is an object which return an Source URL
+            img.style.size="18px"
+            
+  return img;
+        }
+        //select an container
+        const container=document.querySelector('.container');
+        const arrayURLImges = [
+        "https://picsum.photos/200/300?random=1",
+        "https://picsum.photos/200/300?random=2",
+        "https://picsum.photos/200/300?random=3",
+        "https://picsum.photos/200/300?random=6",
+        "https://picsum.photos/200/300?random=5"
+    ];
+
+    arrayURLImges.forEach((item)=>{
+        container.appendChild(dynamicGeneratedImages(item))
+    })
+
+    </script>
+</body>
+</html>
