@@ -16,9 +16,9 @@
         let startTime=60;
      //1. update Counter
      function updateCounter(){
-      let minutes=Math.floor(startTime/60);//we got an Minutes
-      let second=startTime%60;//we got minutes
-      let counterTime=`${minutes.toString().padStart(2,'0')}:${second.toString().padStart(2,'0')}`;
+   let minutes=Math.floor(startTime/60);//we got an Minutes
+   let second=startTime%60;//we got minutes
+    let counterTime=`${minutes.toString().padStart(2,'0')}:${second.toString().padStart(2,'0')}`;
     counter.textContent=counterTime;
      }    
 
