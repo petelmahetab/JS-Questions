@@ -11,126 +11,167 @@
         We have to solve 2 question's form that.
         5 DSA
         1 Question STOCK and SELL problem
-    <h5>Solution -> </h5>
-    <h6 style="font-size: large;">
-    </h6>
-    <h3>For the solution, check the console...</h3>
-    <script>
-        //Here  We have list of prices array we need to sell the stock for getting maxProfit.
-      function returnMaxPro(arr){
-          let min=Infinity;
-          let maxProfit=0;
-          for(let i  of arr){
-             if(i < min){
-                 min=i;
-             }else{
-                 maxProfit=Math.max(maxProfit,i-min);
+        <h5>Solution -> </h5>
+        <h6 style="font-size: large;">
+        </h6>
+        <h3>For the solution, check the console...</h3>
+        <script>
+            //Here  We have list of prices array we need to sell the stock for getting maxProfit.
+            function returnMaxPro(arr) {
+                let min = Infinity;
+                let maxProfit = 0;
+                for (let i of arr) {
+                    if (i < min) {
+                        min = i;
+                    } else {
+                        maxProfit = Math.max(maxProfit, i - min);
+                    }
+                }
+                return maxProfit;
+            }
+            let arr = [5, 1, 2, 6, 3, 8, 10, 5];
+            console.log(returnMaxPro(arr));
+
+            //Return Duplicates elements in ARRAY
+            /*function getDuplicates(arr){
+                let map=new Map();
+                let duplicates=[];
+            
+                for(let i of arr){
+                    map.set(i,(map.get(i) || 0) +1);
+                }
+            
+                for(let [key,value] of map){
+                   if(value > 1)
+                   { duplicates.push(key);}
+                }
+                return duplicates;
+            }
+              let ar=[1,2,8,9,1,2,6,8,6,4,2,1,6,3];
+              console.log('Duplicates Array ',getDuplicates(ar));
+            */
+            function getDuplicateThroughSet(ar) {
+                let trackUnique = new Set();
+                let duplicate = new Set();
+                for (let i of ar) {
+                    if (trackUnique.has(i)) {
+                        duplicate.add(i);
+                    } else {
+                        trackUnique.add(i);
+                    }
+                }
+                return [...duplicate];
+            }
+            let Ar = [1, 2, 5, 63, 8, 9, 3, 1, 6, 3, 5, 2, 5, 4, 1, 36, 9, 4, 3, 6];
+            console.log(getDuplicateThroughSet(Ar));
+
+
+            /*Electricity Bill*/
+            //if 0 to 100 ->4 Unit ,101 to 200 -> 6 Unit,201 to 400 ->8 unit and more than 400 -> 13/Unit
+            //   <----- Bottom to Up
+            /* let Unit=Number(prompt('Enter Unit Here...'));
+             let amount=0;
+           
+             if(Unit > 400){
+                 amount=(Unit-400)*13;
+                 Unit=400;
              }
-          }
-          return maxProfit;
-      }
-        let arr=[5,1,2,6,3,8,10,5];
-console.log(returnMaxPro(arr));
+             
+             if(Unit >200 && Unit <=400){
+               amount+=(Unit-200)*8;
+               Unit=200;
+           }
+           if(Unit > 100 && Unit <=200){
+               amount+=(Unit-100)*6;
+               Unit=100;
+           }
+           
+           amount+=Unit*4;
+           console.log(amount)*/
 
-//Return Duplicates elements in ARRAY
-/*function getDuplicates(arr){
-    let map=new Map();
-    let duplicates=[];
+            let Amount = Number(prompt('Enter amount ...'));
+            if (Amount > 500) {
+                console.log("500 notes is :=> " + Math.floor(Amount / 500));
+                Amount %= 500;
+            }
 
-    for(let i of arr){
-        map.set(i,(map.get(i) || 0) +1);
-    }
+            if (Amount > 200) {
+                console.log("200 notes is :=> " + Math.floor(Amount / 200));
+                Amount %= 200;
+            }
 
-    for(let [key,value] of map){
-       if(value > 1)
-       { duplicates.push(key);}
-    }
-    return duplicates;
-}
-  let ar=[1,2,8,9,1,2,6,8,6,4,2,1,6,3];
-  console.log('Duplicates Array ',getDuplicates(ar));
-*/
-function getDuplicateThroughSet(ar){
-    let trackUnique=new Set();
-    let duplicate=new Set();
-    for(let i of ar){
-        if(trackUnique.has(i)){
-            duplicate.add(i);
-        }else{
-            trackUnique.add(i);
-        }
-    }
-    return [...duplicate];
-}
-let Ar=[1,2,5,63,8,9,3,1,6,3,5,2,5,4,1,36,9,4,3,6];
-console.log(getDuplicateThroughSet(Ar));
+            if (Amount > 100) {
+                console.log("100 notes is :=> " + Math.floor(Amount / 100));
+                Amount %= 100;
+            }
+
+            if (Amount > 50) {
+                console.log("50 notes is :=> " + Math.floor(Amount / 50));
+                Amount %= 50;
+            }
 
 
-/*Electricity Bill*/
-//if 0 to 100 ->4 Unit ,101 to 200 -> 6 Unit,201 to 400 ->8 unit and more than 400 -> 13/Unit
-//   <----- Bottom to Up
- /* let Unit=Number(prompt('Enter Unit Here...'));
-  let amount=0;
+            if (Amount > 20) {
+                console.log("20 notes is :=> " + Math.floor(Amount / 20));
+                Amount %= 20;
+            }
 
-  if(Unit > 400){
-      amount=(Unit-400)*13;
-      Unit=400;
-  }
-  
-  if(Unit >200 && Unit <=400){
-    amount+=(Unit-200)*8;
-    Unit=200;
-}
-if(Unit > 100 && Unit <=200){
-    amount+=(Unit-100)*6;
-    Unit=100;
-}
+            if (Amount > 10) {
+                console.log("10 notes is :=> " + Math.floor(Amount / 10));
+                Amount %= 10;
+            }
+            if (Amount > 5) {
+                console.log("5 notes is :=> " + Math.floor(Amount / 5));
+                Amount %= 5;
+            }
 
-amount+=Unit*4;
-console.log(amount*/
-
-let Amount=Number(prompt('Enter amount ...'));
-if(Amount > 500){
-    console.log("500 notes is :=> "+Math.floor(Amount/500));
-    Amount%=500;
-}
-
-if(Amount > 200){
-    console.log("200 notes is :=> "+Math.floor(Amount/200));
-    Amount%=200;
-}
-
-if(Amount > 100){
-    console.log("100 notes is :=> "+Math.floor(Amount/100));
-    Amount%=100;
-}
-
-if(Amount > 50){
-    console.log("50 notes is :=> "+Math.floor(Amount/50));
-    Amount%=50;
-}
+            if (Amount > 2) {
+                console.log("2 notes is :=> " + Math.floor(Amount / 2));
+                Amount %= 2;
+            }
 
 
-if(Amount > 20){
-    console.log("20 notes is :=> "+Math.floor(Amount/20));
-    Amount%=20;
-}
+            //Calculate Hamming Distance :->  1.String must be same length , 2.Return how many character will be different on them.
+            function hammingDistance(str1, str2) {
+                 if(str1.length !== str2.length){
+                      throw new Error('String must have same Length');
+                 }
+                 let distance=0;
+                 for(let i=0;i<=str1.length;i++){
+                     /* if(str1[i]!==str2[i]){
+                         distance++;
+                     } */
+                     distance +=str1[i]!==str2[i];
+                 }
+                 return distance;
+            }
 
-if(Amount > 10){
-    console.log("10 notes is :=> "+Math.floor(Amount/10));
-    Amount%=10;
-}
-if(Amount > 5){
-    console.log("5 notes is :=> "+Math.floor(Amount/5));
-    Amount%=5;
-}
+            console.log(hammingDistance('hello', 'hileo')); // 2 characters would be Different.
 
-if(Amount > 2){
-    console.log("2 notes is :=> "+Math.floor(Amount/2));
-    Amount%=2;
-}
 
-    </script>
+            //Anagram string or Not.
+            function checkAnagram(first, second) {
+                if (first.length !== second.length) return false;
+            
+                let ob1 = {};
+                let ob2 = {};
+            
+                for (let i = 0; i < first.length; i++) {
+                    ob1[first[i]] = (ob1[first[i]] || 0) + 1;
+                    ob2[second[i]] = (ob2[second[i]] || 0) + 1;
+                }
+            
+                for (let k in ob1) {
+                    if (ob1[k] !== ob2[k]) return false; 
+                }
+            
+                return true;
+            }
+            
+            console.log(checkAnagram('heool', 'helour')); // false
+            console.log(checkAnagram('helol', 'hello'));  // true
+            
+        </script>
 </body>
 
 </html>
