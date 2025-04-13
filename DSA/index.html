@@ -133,17 +133,17 @@
 
             //Calculate Hamming Distance :->  1.String must be same length , 2.Return how many character will be different on them.
             function hammingDistance(str1, str2) {
-                 if(str1.length !== str2.length){
-                      throw new Error('String must have same Length');
-                 }
-                 let distance=0;
-                 for(let i=0;i<=str1.length;i++){
-                     /* if(str1[i]!==str2[i]){
-                         distance++;
-                     } */
-                     distance +=str1[i]!==str2[i];
-                 }
-                 return distance;
+                if (str1.length !== str2.length) {
+                    throw new Error('String must have same Length');
+                }
+                let distance = 0;
+                for (let i = 0; i <= str1.length; i++) {
+                    /* if(str1[i]!==str2[i]){
+                        distance++;
+                    } */
+                    distance += str1[i] !== str2[i];
+                }
+                return distance;
             }
 
             console.log(hammingDistance('hello', 'hileo')); // 2 characters would be Different.
@@ -152,25 +152,57 @@
             //Anagram string or Not.
             function checkAnagram(first, second) {
                 if (first.length !== second.length) return false;
-            
+
                 let ob1 = {};
                 let ob2 = {};
-            
+
                 for (let i = 0; i < first.length; i++) {
                     ob1[first[i]] = (ob1[first[i]] || 0) + 1;
                     ob2[second[i]] = (ob2[second[i]] || 0) + 1;
                 }
-            
+
                 for (let k in ob1) {
-                    if (ob1[k] !== ob2[k]) return false; 
+                    if (ob1[k] !== ob2[k]) return false;
                 }
-            
+
                 return true;
             }
-            
+
             console.log(checkAnagram('heool', 'helour')); // false
             console.log(checkAnagram('helol', 'hello'));  // true
-            
+
+
+            //Sort the Colors .. We have array we need to sort the element without the SORT method. Use 3 pointer.
+            function sortColors(arr) {
+                //Use Bubble-sort O(n^2)
+                let n = arr.length;
+                for (let i = 0; i < n; i++) {
+                    for (let j = 0; j < n - 1; j++) {
+                        if (arr[j] > arr[j + 1]) {
+                            let t = arr[j + 1];
+                            arr[j + 1] = arr[j];
+                            arr[j] = t;
+                        }
+
+                    }
+                }
+                return arr;
+            }
+            console.log(sortColors([0, 1, 2, 5, 0, 5, 1, 0, 3, 1, 0, 2, 0])) //->[0,0,0,0,0,1,1,1,2,2,3,5,5]
+
+
+            //Kadane's Algo(Maximum Sub-Array)
+
+            function kadane_Algo(arr) {
+                let maxi = -Infinity;
+                let maxSoFar = 0;
+                for (let i = 0; i < arr.length; i++) {
+  maxSoFar=Math.max(arr[i],maxSoFar+arr[i]);
+  maxi=Math.max(maxSoFar,maxi);
+                }
+                return maxi;
+            }
+            console.log('output',kadane_Algo([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
         </script>
 </body>
 
