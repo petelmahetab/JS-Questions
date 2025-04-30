@@ -1,51 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    
-    <title>Document</title>
+
+  <title>Document</title>
 </head>
+
 <body style="background-color: black;color:white">
-    
-    <h1>We have to return string as space where Upper case start's in given String.
-      </h1>
-    <script>
-       //1.Guess the Output
 
-//var myObj={
-  //  foo:'baar',
+  <h1>We have to return string as space where Upper case start's in given String.
+  </h1>
+  <script>
+    //1.Guess the Output
+
+    //var myObj={
+    //  foo:'baar',
     //fun:function(){
-      //  var self=this;
-        //console.log('Outer Func'+this.foo);
-        //console.log('Outer Func'+self.foo);
-        //(function(){
-          //  console.log('Inner Func'+this.foo);
-            //console.log('Inner Func'+self.foo);
-        //}())
+    //  var self=this;
+    //console.log('Outer Func'+this.foo);
+    //console.log('Outer Func'+self.foo);
+    //(function(){
+    //  console.log('Inner Func'+this.foo);
+    //console.log('Inner Func'+self.foo);
+    //}())
     //}
-//}
+    //}
 
-//Har bar Json me if value not present then we get "Undefined"
-//Object lexical scope me nhi hoga Naam ho skata hai per Object nhi hoga
+    //Har bar Json me if value not present then we get "Undefined"
+    //Object lexical scope me nhi hoga Naam ho skata hai per Object nhi hoga
 
-///baar
-//baar
-//undefind 'this'=>global aur is code me dusra global me foo nhi hai isliye
-//baar => self refer kar raha hai myObj context ko and value return karega
-
-
-//closure
+    ///baar
+    //baar
+    //undefind 'this'=>global aur is code me dusra global me foo nhi hai isliye
+    //baar => self refer kar raha hai myObj context ko and value return karega
 
 
-  //2.I/P ='IAmFeelingLikeBillionaire'  => 'I Am Feeling Like Billionaire'
-    
-  const str='IAmFeelingLikeBillionaire'; //Using Regex()
-  function addSpaceUpperCaseAlpha(str){
-     return str.replace(/([a-z])([A-Z])/g, '$1 $2');
-   
-  }
-  console.log(addSpaceUpperCaseAlpha(str));
+    //closure
 
 
-    </script>
+    //2.I/P ='IAmFeelingLikeBillionaire'  => 'I Am Feeling Like Billionaire'
+
+    const str = 'IAmFeelingLikeBillionaire'; //Using Regex()
+    function addSpaceUpperCaseAlpha(str) {
+      return str.replace(/([a-z])([A-Z])/g, '$1 $2');
+
+    }
+    console.log(addSpaceUpperCaseAlpha(str));
+
+
+  </script>
 </body>
+
 </html>

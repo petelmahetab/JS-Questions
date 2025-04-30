@@ -16,6 +16,7 @@
     </h6>
     <h3>For the solution, check the console...</h3>
     <script>
+        
         //Pollyfills for the Map.
         //Create function by getting Prototype
         /*   Array.prototype.pollyfillForMap=function(callBack){
@@ -42,28 +43,124 @@
         let testPollyFill = arr.pollyfillForMap((ele, i, arr) => {
             return arr[i] * 2 * 2;
         })
-        console.log(testPollyFill)
+        console.log('Result custom Map Pollyfills :->', testPollyFill)
 
 
         //PollyFills for Filter
         Array.prototype.pollyfillForFilter = function (cb) {
-                  let result=[];
-                  for(let i=0;i<this.length;i++){
-                      if(cb(this[i],i,this))
-                      {
-                           result.push(this[i])
-                    }
-                  }
-                  return result;
+            let result = [];
+            for (let i = 0; i < this.length; i++) {
+                if (cb(this[i], i, this)) {
+                    result.push(this[i])
+                }
+            }
+            return result;
         }
 
         let arr2 = [1, 2, 3, 4, 5, 6, 7];
 
         let testPollyFill2 = arr.pollyfillForFilter((ele, i, arr) => {
-            return arr[i]  > 5;
+            return arr[i] > 5;
         })
-        console.log(testPollyFill2)
+        console.log('Result custom Filter Pollyfills :->', testPollyFill2)
 
+
+
+
+        //Pollyfills for the Reduce
+
+        Array.prototype.pollyfillForReduce = function (cb, initialVal) {
+            //Accumalator stores the previously calculated Result.Default start with initialVal.
+            let acc = initialVal;
+            for (let i = 0; i < this.length; i++) {
+                //Agar accumlator Nhi diya hai default toh Array ki 1 index Acc ko consider karo.
+                acc = acc ? cb(acc,this[i], i, this) : this[i];
+            }
+            return acc;
+        }
+
+        let arr3 = [1, 2, 3, 4, 5, 6, 7];
+
+        let testPollyFill3 = arr3.pollyfillForReduce((acc, cur, i, arr3) => {
+            return acc+cur;
+        },0)
+        console.log('Result custom Reduce Pollyfills :->', testPollyFill3)
+
+
+
+        // Pollyfills for the  Call method which used to map Function to object.
+
+        Function.prototype.myCall=function(ctx={},...args)
+          {
+                  if(typeof this !== 'function'){
+                      throw new Error("Can't applied call Method because it does not have Function");
+                  }
+
+                  ctx.fun=this;
+                  ctx.fun(...args);
+          }
+          let obj={
+              name:"Vikky",age:52
+          }
+          function displayName(name, age){
+               console.log("Your  name is",this.name, 'and your age ',this.age);   
+          }
+          let result=displayName.myCall(obj);
+          console.log(result);
+
+
+          //pollyFills for Apply
+          
+
+        Function.prototype.myApply=function(ctx={},args=[])
+        {
+                if(typeof this !== 'function'){
+                    throw new Error("Can't applied call Method because it does not have Function.");
+                }
+
+
+                if(!Array.isArray(args)){
+                    throw new Error('CreateListFromArrayLine called on Non-Object.');
+                }
+                ctx.fun=this;
+                return ctx.fun(...args);
+        }
+
+        let obj2={
+            profession:'Billionaire',
+            atAgeOf:'30'
+        }
+
+        function displayIntro(...args){
+            console.log("I'm the First ",this.profession," and in my family at age of ",this.atAgeOf);
+            console.log("Here are my business are Located ",args);
+        }
+
+        let yourApply=displayIntro.myApply(obj2,['London','California','France','Dubai'])
+        
+
+
+        // Pollyfills for the  Bind
+        Function.prototype.myBind=function(ctx={},...args){
+            if(typeof this !== 'function'){
+                throw new Error("Can't applied call Method because it does not have Function.")
+            }
+
+            const originalFun=this;
+            return function(...otherArgs){
+                 return originalFun.apply(ctx,[...args,...otherArgs])
+            }
+        }
+
+        let obj3={
+            type:'Male',mode:'ALPHA'
+        }
+        function displayProperties(type,mode){
+            console.log('Everyone has be ',this.male,"but Not EveryOne",this.mode);
+            console.log(type,mode);
+        }
+        let testbind=displayIntro.myBind(obj3,5)
+        testbind(50)
     </script>
 </body>
 

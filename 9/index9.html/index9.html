@@ -9,7 +9,7 @@
 <body style="background-color: black;color:white;">
 
     <h1 style="text-align: center;">Motivational Quotes</h1>
-    <div class="Display" >Loading....</div>
+    <div class="Display">Loading....</div>
     <script>
         const funnyQuotes = [
             "I'm not lazy, I'm just on energy-saving mode.",
@@ -31,18 +31,18 @@
 
 
         //1.Create Function for display Random QUOTES
-         function displayQuotes(){
-             const quotesDisplay=document.querySelector('.Display');
-             quotesDisplay.style.fontSize="5vw"
-             quotesDisplay.style.marginTop="150px"
-             quotesDisplay.style.marginLeft="150px"
-             quotesDisplay.style.color="Red"
-             const generateRandom=Math.floor(Math.random()*funnyQuotes.length);
-             quotesDisplay.textContent=funnyQuotes[generateRandom];
-         }
-displayQuotes();
-         //2.Change the Quotes Every 1 seconds using SETINTERVAL
-         setInterval(displayQuotes,5000)
+        function displayQuotes() {
+            const quotesDisplay = document.querySelector('.Display');
+            quotesDisplay.style.fontSize = "5vw"
+            quotesDisplay.style.marginTop = "150px"
+            quotesDisplay.style.marginLeft = "150px"
+            quotesDisplay.style.color = "Red"
+            const generateRandom = Math.floor(Math.random() * funnyQuotes.length);
+            quotesDisplay.textContent = funnyQuotes[generateRandom];
+        }
+        displayQuotes();
+        //2.Change the Quotes Every 1 seconds using SETINTERVAL
+        setInterval(displayQuotes, 5000)
     </script>
 </body>
 

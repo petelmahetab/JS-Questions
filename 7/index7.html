@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    
+
     <title>Q 7 || COUNTER</title>
 </head>
+
 <body style="background-color: black; color:white;">
     <h1 style="text-align:center;">....Counter....</h1>
     <!-- Using SetInterval we have to create an COUNTER start with 60 and Decreases and when he came 0 then Pop up will be came "Completed" -->
@@ -11,29 +13,30 @@
 
     <script>
         //get the COUNTER
-        const counter=document.querySelector('.counter');
+        const counter = document.querySelector('.counter');
         //Apply listener on counter
-        let startTime=60;
-     //1. update Counter
-     function updateCounter(){
-   let minutes=Math.floor(startTime/60);//we got an Minutes
-   let second=startTime%60;//we got minutes
-    let counterTime=`${minutes.toString().padStart(2,'0')}:${second.toString().padStart(2,'0')}`;
-    counter.textContent=counterTime;
-     }    
+        let startTime = 60;
+        //1. Update Counter
+        function updateCounter() {
+            let minutes = Math.floor(startTime / 60);//we got an Minutes
+            let second = startTime % 60;//we got Seconds
+            let counterTime = `${minutes.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`;
+            counter.textContent = counterTime;
+        }
 
-     //2.Set the  setInterval functioncd 
-     function useInterval(){
-         if(startTime > 0){
-             startTime--;
-             updateCounter();
-         }else{
-             clearInterval(interval)
-             alert("COUNT DOWN IS COMPLETED..")
-         }
-     }
+        //2.Set the  setInterval functioncd 
+        function useInterval() {
+            if (startTime > 0) {
+                startTime--;
+                updateCounter();
+            } else {
+                clearInterval(interval)
+                alert("COUNT DOWN IS COMPLETED..")
+            }
+        }
 
-     const interval=setInterval(useInterval,1000);
+        const interval = setInterval(useInterval, 1000);
     </script>
 </body>
+
 </html>
