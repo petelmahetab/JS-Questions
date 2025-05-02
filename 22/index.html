@@ -16,7 +16,7 @@
     </h6>
     <h3>For the solution, check the console...</h3>
     <script>
-        
+
         //Pollyfills for the Map.
         //Create function by getting Prototype
         /*   Array.prototype.pollyfillForMap=function(callBack){
@@ -74,7 +74,7 @@
             let acc = initialVal;
             for (let i = 0; i < this.length; i++) {
                 //Agar accumlator Nhi diya hai default toh Array ki 1 index Acc ko consider karo.
-                acc = acc ? cb(acc,this[i], i, this) : this[i];
+                acc = acc ? cb(acc, this[i], i, this) : this[i];
             }
             return acc;
         }
@@ -82,85 +82,146 @@
         let arr3 = [1, 2, 3, 4, 5, 6, 7];
 
         let testPollyFill3 = arr3.pollyfillForReduce((acc, cur, i, arr3) => {
-            return acc+cur;
-        },0)
+            return acc + cur;
+        }, 0)
         console.log('Result custom Reduce Pollyfills :->', testPollyFill3)
 
 
 
         // Pollyfills for the  Call method which used to map Function to object.
 
-        Function.prototype.myCall=function(ctx={},...args)
-          {
-                  if(typeof this !== 'function'){
-                      throw new Error("Can't applied call Method because it does not have Function");
-                  }
+        Function.prototype.myCall = function (ctx = {}, ...args) {
+            if (typeof this !== 'function') {
+                throw new Error("Can't applied call Method because it does not have Function");
+            }
 
-                  ctx.fun=this;
-                  ctx.fun(...args);
-          }
-          let obj={
-              name:"Vikky",age:52
-          }
-          function displayName(name, age){
-               console.log("Your  name is",this.name, 'and your age ',this.age);   
-          }
-          let result=displayName.myCall(obj);
-          console.log(result);
-
-
-          //pollyFills for Apply
-          
-
-        Function.prototype.myApply=function(ctx={},args=[])
-        {
-                if(typeof this !== 'function'){
-                    throw new Error("Can't applied call Method because it does not have Function.");
-                }
+            ctx.fun = this;
+            ctx.fun(...args);
+        }
+        let obj = {
+            name: "Vikky", age: 52
+        }
+        function displayName(name, age) {
+            console.log("Your  name is", this.name, 'and your age ', this.age);
+        }
+        let result = displayName.myCall(obj);
+        console.log(result);
 
 
-                if(!Array.isArray(args)){
-                    throw new Error('CreateListFromArrayLine called on Non-Object.');
-                }
-                ctx.fun=this;
-                return ctx.fun(...args);
+        //pollyFills for Apply
+
+
+        Function.prototype.myApply = function (ctx = {}, args = []) {
+            if (typeof this !== 'function') {
+                throw new Error("Can't applied call Method because it does not have Function.");
+            }
+
+
+            if (!Array.isArray(args)) {
+                throw new Error('CreateListFromArrayLine called on Non-Object.');
+            }
+            ctx.fun = this;
+            return ctx.fun(...args);
         }
 
-        let obj2={
-            profession:'Billionaire',
-            atAgeOf:'30'
+        let obj2 = {
+            profession: 'Billionaire',
+            atAgeOf: '30'
         }
 
-        function displayIntro(...args){
-            console.log("I'm the First ",this.profession," and in my family at age of ",this.atAgeOf);
-            console.log("Here are my business are Located ",args);
+        function displayIntro(...args) {
+            console.log("I'm the First ", this.profession, " and in my family at age of ", this.atAgeOf);
+            console.log("Here are my business are Located ", args);
         }
 
-        let yourApply=displayIntro.myApply(obj2,['London','California','France','Dubai'])
-        
+        let yourApply = displayIntro.myApply(obj2, ['London', 'California', 'France', 'Dubai'])
+
 
 
         // Pollyfills for the  Bind
-        Function.prototype.myBind=function(ctx={},...args){
-            if(typeof this !== 'function'){
+        Function.prototype.myBind = function (ctx = {}, ...args) {
+            if (typeof this !== 'function') {
                 throw new Error("Can't applied call Method because it does not have Function.")
             }
 
-            const originalFun=this;
-            return function(...otherArgs){
-                 return originalFun.apply(ctx,[...args,...otherArgs])
+            const originalFun = this;
+            return function (...otherArgs) {
+                return originalFun.apply(ctx, [...args, ...otherArgs])
             }
         }
 
-        let obj3={
-            type:'Male',mode:'ALPHA'
+        let obj3 = {
+            type: 'Male', mode: 'ALPHA'
         }
-        function displayProperties(type,mode){
-            console.log('Everyone has be ',this.male,"but Not EveryOne",this.mode);
-            console.log(type,mode);
+        function displayProperties(type, mode) {
+            console.log('Everyone has be ', this.male, "but Not EveryOne", this.mode);
+            console.log(type, mode);
         }
-        let testbind=displayIntro.myBind(obj3,5)
+        let testbind = displayIntro.myBind(obj3, 5)
         testbind(50)
+
+
+
+        //Pollyfills for the Once Method..What is does is that If we Ran an log multiple time then Using Once method it will run ONCE.
+
+        function oncePolly(func, context) {
+            //TO run Single time We use
+            let ran;
+
+
+            return function () {
+                if (func) {
+                    ran = func.apply(context || this, arguments);
+                    func = null;
+                }
+                return ran;
+            }
+
+        }
+
+        let someThing = oncePolly((a, b) => console.log("hiii", a, b)); //If I wrap with ONCE then it will run ONCE.
+
+        someThing(1, 5);
+        someThing(1, 5);
+        someThing(1, 6);
+
+        //Pollyfills for Memoization/Catching
+
+        function memoizateTasks(fun, cont) {
+
+            //onject to store the catched Result
+            let cached = {};
+            return function (...args) {
+                //Convert the arguments into ToString
+                let cachedString=JSON.stringify(args);
+            if(!(cachedString in cached)){
+                cached[cachedString]=fun.call(cont || this,...args)
+            }
+            return cached[cachedString];
+            }
+        }
+
+  
+
+        const havyComputation = (a, b) => {
+            for (let i = 0; i <= 1e8; i++) {
+                return a * b;
+            }
+        }
+         let ReduceComputationTask=memoizateTasks(havyComputation);
+        console.time("1 time")
+        console.log(havyComputation(4870, 55448));
+        console.timeEnd('1 time')
+
+        console.time("2 time")
+        console.log(ReduceComputationTask(4870, 55448));
+        console.timeEnd('2 time')
+
+        console.time("2 time")
+        console.log(ReduceComputationTask(4870, 55448));
+        console.timeEnd('2 time')
+
+     
     </script>
 </body>
 
