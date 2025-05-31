@@ -12,7 +12,7 @@ const arrayURLImges = [
 async function handleYourImges() {
     try {
         // Wait for all images to load
-        let loadedImages = await Promise.all(arrayURLImges.map(loadedImage)); // Correct function name
+        let loadedImages = await Promise.all(arrayURLImges.map(loadedImage)); 
         // Append each loaded image to the container
         loadedImages.forEach(img => {
             imgeDiv.appendChild(img);
