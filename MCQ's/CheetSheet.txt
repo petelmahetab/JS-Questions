@@ -1,0 +1,150 @@
+                                                           Web Development Interview MCQ Test (2024-2025)
+This test contains 20 multiple-choice questions based on recent web development interview questions asked at big tech firms in 2024 and 2025. Topics include HTML, CSS, JavaScript, React, web performance, APIs, and system design. Select the correct option for each question and submit your answers as a list (e.g., "1: B, 2: C, ..."). You’ll receive feedback on whether each answer is correct or incorrect, along with explanations.
+
+1. What is the purpose of the HTML <meta> tag with the viewport attribute?
+A) To define the character encoding of the document
+B) To set the initial zoom level and width for responsive design
+C) To specify the document’s title in the browser tab
+D) To link external CSS files  
+=> B
+
+2. In CSS, what does the box-sizing: border-box; property do?
+A) Excludes padding and border from the element’s total width and height
+B) Includes padding and border in the element’s total width and height
+C) Sets the element to use flexbox layout
+D) Centers the element horizontally  
+=> 
+
+3. What is the difference between == and === in JavaScript?
+A) == compares values after type coercion, === compares value and type
+B) == is used for objects, === is used for primitives
+C) == checks reference equality, === checks value equality
+D) == is deprecated, === is the only valid comparison operator  
+=>A
+
+4. What does the JavaScript async keyword do when used with a function?
+A) Makes the function execute synchronously
+B) Ensures the function returns a Promise
+C) Prevents the function from being called more than once
+D) Automatically catches errors in the function  
+=>B
+
+5. In React, what is the purpose of the useEffect hook?
+A) To manage state in functional components
+B) To handle side effects like data fetching or DOM manipulation
+C) To optimize component rendering
+D) To replace the useState hook for complex state.
+=>B
+
+6. What is the purpose of the HTTP CORS mechanism?
+A) To compress HTTP requests for faster transmission
+B) To allow or restrict cross-origin resource sharing
+C) To authenticate users across different domains
+D) To cache resources on the client side.
+=>B
+
+7. Which CSS property is used to create smooth scrolling behavior for a webpage?
+A) scroll-behavior: smooth;
+B) scroll-snap-type: mandatory;
+C) overflow: auto;
+D) transition: scroll 0.3s;  
+=>A
+
+8. What is the output of the following JavaScript code?
+console.log(typeof null);
+
+A) "null"
+B) "undefined"
+C) "object"
+D) "string"  
+=>C
+
+9. In a REST API, what is the purpose of the PUT method?
+A) To retrieve data from the server
+B) To create a new resource
+C) To update an existing resource or create if it doesn’t exist
+D) To delete a resource  
+=>C
+
+10. In React, what is the Virtual DOM?
+A) A lightweight copy of the actual DOM used for efficient updates
+B) A database for storing component state
+C) A tool for debugging React components
+D) A replacement for CSS in React applications 
+=>A
+
+11. What does the CSS flex: 1; shorthand property represent?
+A) flex-grow: 1; flex-shrink: 0; flex-basis: auto;
+B) flex-grow: 1; flex-shrink: 1; flex-basis: 0%;
+C) flex-grow: 0; flex-shrink: 1; flex-basis: auto;
+D) flex-grow: 1; flex-shrink: 0; flex-basis: 100%;  
+=>B
+
+12. What is the purpose of the JavaScript debounce function in web development?
+A) To delay the execution of a function until after a specified time of inactivity
+B) To execute a function immediately and prevent further calls
+C) To cache function results for faster execution
+D) To throttle API requests to a server  
+=>A
+
+13. Which HTML attribute is used to provide a unique identifier for an element?
+A) class
+B) id
+C) name
+D) data 
+=>B
+
+14. In JavaScript, what does the event.preventDefault() method do?
+A) Stops the event from bubbling up the DOM tree
+B) Prevents the default behavior of an event (e.g., form submission)
+C) Cancels all events on the page
+D) Triggers a custom event  
+=>B
+
+15. What is the purpose of the useMemo hook in React?
+A) To memoize expensive computations and prevent unnecessary recalculations
+B) To manage component lifecycle methods
+C) To handle asynchronous operations
+D) To replace useState for complex state  
+=>A
+
+16. In CSS, what does the position: sticky; property do?
+A) Fixes an element in place relative to the viewport
+B) Positions an element relative to its nearest scrolling ancestor
+C) Aligns an element to the center of its parent
+D) Hides an element until scrolled into view  
+=>B
+
+17. What is the purpose of the fetch API in JavaScript?
+A) To manipulate the DOM directly
+B) To make HTTP requests to retrieve or send data
+C) To store data in the browser’s local storage
+D) To parse XML documents  
+=>B
+
+18. In a system design interview, what is a common approach to handle high traffic on a web application?
+A) Use a single server to handle all requests
+B) Implement load balancing with multiple servers
+C) Disable caching to ensure fresh data
+D) Store all data in the client’s browser  
+=>B
+
+19. What is the output of the following JavaScript code?
+const arr = [1, 2, 3];
+console.log(arr.map(x => x * 2));
+
+A) [1, 2, 3]
+B) [2, 4, 6]
+C) [3, 6, 9]
+D) [1, 4, 9]  
+=>B
+
+20. What is the purpose of the rel attribute in an HTML <a> tag?
+A) To specify the relationship between the current document and the linked resource
+B) To define the anchor’s text content
+C) To set the target window for the link
+D) To apply CSS styles to the link  
+=>A
+
+
+                                                                                        Thank U
