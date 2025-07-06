@@ -13,7 +13,7 @@ A) Excludes padding and border from the element’s total width and height
 B) Includes padding and border in the element’s total width and height
 C) Sets the element to use flexbox layout
 D) Centers the element horizontally  
-=> 
+=> B
 
 3. What is the difference between == and === in JavaScript?
 A) == compares values after type coercion, === compares value and type
