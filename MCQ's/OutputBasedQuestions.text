@@ -1,0 +1,152 @@
+                                    JavaScript Other Concepts Output-Based Questions (2024-2025)
+These 10 output-based questions focus on key JavaScript concepts (closures, async programming, scope, prototypal inheritance) essential for clearing technical interviews. Each question includes a code snippet, four answer options, the correct answer, and an explanation.
+
+1. Closures: What is the output of the following code?
+function createCounter() {
+  let count = 0;
+  return function() {
+    return count++;
+  };
+}
+const counter = createCounter();
+console.log(counter(), counter());
+
+A) 0, 0
+B) 0, 1
+C) 1, 2
+D) undefined, undefined  
+
+Answer: B) 0, 1Explanation: The inner function forms a closure, retaining access to count. The first call to counter() returns 0 and increments count to 1 (post-increment). The second call returns 1 and increments to 2. This tests closure and variable persistence.
+
+2. Async Programming: What is the output of the following code?
+async function foo() {
+  console.log('Start');
+  await Promise.resolve('Middle');
+  console.log('End');
+}
+foo();
+console.log('Outside');
+
+A) Start, End, Outside
+B) Start, Outside, End
+C) Outside, Start, End
+D) End, Start, Outside  
+
+Answer: B) Start, Outside, EndExplanation: foo logs 'Start' synchronously. The await pauses the function, queuing 'End' as a microtask. console.log('Outside') runs synchronously after foo() is called, logging next. The microtask ('End') runs last. This tests async/await and the event loop.
+
+3. Scope: What is the output of the following code?
+var x = 10;
+function foo() {
+  var x = 20;
+  console.log(x);
+}
+foo();
+console.log(x);
+
+A) 20, 10
+B) 10, 20
+C) 20, 20
+D) 10, 10  
+
+Answer: A) 20, 10Explanation: Inside foo, var x = 20 creates a local variable, shadowing the global x. foo logs 20, and the global console.log(x) logs 10. This tests variable scope and shadowing.
+
+4. Prototypal Inheritance: What is the output of the following code?
+function Person(name) {
+  this.name = name;
+}
+Person.prototype.greet = function() {
+  console.log(this.name);
+};
+const p = new Person('Alice');
+p.greet();
+
+A) Alice
+B) undefined
+C) TypeError
+D) null  
+
+Answer: A) AliceExplanation: The greet method is added to Person.prototype, inherited by p. Calling p.greet() logs p.name ('Alice'). This tests prototypal inheritance and method lookup.
+
+5. Promises: What is the output of the following code?
+Promise.resolve('A')
+  .then((val) => {
+    console.log(val);
+    return 'B';
+  })
+  .then((val) => console.log(val));
+
+A) A, B
+B) B, A
+C) A
+D) TypeError  
+
+Answer: A) A, BExplanation: The first .then logs 'A' and returns 'B'. The second .then logs 'B'. Promises execute sequentially, logging resolved values. This tests Promise chaining.
+
+6. Closures in Loops: What is the output of the following code?
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+
+A) 0, 1, 2
+B) 3, 3, 3
+C) undefined, undefined, undefined
+D) TypeError  
+
+Answer: B) 3, 3, 3Explanation: var i is function-scoped, so all setTimeout callbacks reference the same i. By the time the callbacks run (after the loop), i is 3. Using let would create a block-scoped i, logging 0, 1, 2. This tests closures in loops and var vs. let.
+
+7. Event Loop: What is the output of the following code?
+console.log('A');
+setTimeout(() => console.log('B'), 0);
+Promise.resolve().then(() => console.log('C'));
+console.log('D');
+
+A) A, D, C, B
+B) A, C, D, B
+C) A, D, B, C
+D) A, B, C, D  
+
+Answer: A) A, D, C, BExplanation: Synchronous code ('A', 'D') runs first. The Promise’s .then is a microtask, logging 'C' after synchronous code. setTimeout is a macrotask, logging 'B' last. This tests microtasks vs. macrotasks in the event loop.
+
+8. Scope and Hoisting: What is the output of the following code?
+console.log(x);
+var x = 5;
+console.log(x);
+
+A) undefined, 5
+B) 5, 5
+C) TypeError
+D) ReferenceError  
+
+Answer: A) undefined, 5Explanation: var x is hoisted, but its initialization (x = 5) is not. The first console.log(x) logs undefined, and the second logs 5 after assignment. This tests hoisting with var.
+
+9. Async Error Handling: What is the output of the following code?
+async function foo() {
+  try {
+    await Promise.reject('Error');
+  } catch (e) {
+    console.log(e);
+  }
+}
+foo();
+
+A) Error
+B) undefined
+C) TypeError
+D) No output  
+
+Answer: A) ErrorExplanation: The await Promise.reject('Error') throws an error, caught by the try/catch block, which logs 'Error'. This tests async error handling with try/catch.
+
+10. Prototypal Inheritance: What is the output of the following code?
+const obj = {};
+Object.defineProperty(obj, 'prop', {
+  value: 42,
+  enumerable: false
+});
+console.log(Object.keys(obj));
+
+A) ['prop']
+B) []
+C) [42]
+D) TypeError  
+
+Answer: B) []Explanation: Object.defineProperty with enumerable: false makes prop non-enumerable, so Object.keys(obj) returns an empty array, as it only includes enumerable properties. This tests property descriptors and enumeration.
