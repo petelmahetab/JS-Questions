@@ -1,0 +1,195 @@
+                                                React Output-Based Questions (2024-2025)
+These 10 output-based questions test your understanding of React concepts like hooks, rendering, state management, and lifecycle. Each question includes a code snippet, four answer options, the correct answer, and an explanation to boost your knowledge.
+
+1. What is the output of the following code?
+
+import React, { useState } from 'react';
+
+function App() {
+  const [count, setCount] = useState(0);
+  console.log('Render');
+  return (
+    <button onClick={() => setCount(count + 1)}>{count}</button>
+  );
+}
+
+export default App;
+
+
+A) Render (once)
+B) Render (twice)
+C) Render (every time the button is clicked)
+D) No output 
+
+Answer: C) Render (every time the button is clicked)
+Explanation: Clicking the button updates count via setCount, triggering a re-render. Each render logs 'Render'. The first render occurs on mount, and subsequent renders occur on each click. This tests state updates and rendering behavior.
+
+2. What is the output of the following code?
+
+import React, { useEffect } from 'react';
+
+function App() {
+  useEffect(() => {
+    console.log('Effect');
+    return () => console.log('Cleanup');
+  }, []);
+  console.log('Render');
+  return <div>Hello</div>;
+}
+
+A) Render, Effect
+B) Effect, Render
+C) Render, Effect, Cleanup
+D) Effect, Cleanup, Render 
+
+Answer: A) Render, Effect
+
+Explanation: The component renders first, logging 'Render'. The useEffect runs after the render, logging 'Effect'. The cleanup function runs only when the component unmounts or the dependency array changes (empty here, so no cleanup on first render). This tests useEffect lifecycle.
+
+3. What is the output of the following code?
+
+import React, { useState } from 'react';
+
+function App() {
+  const [state, setState] = useState({ count: 0 });
+  const increment = () => {
+    setState({ count: state.count + 1 });
+  };
+  console.log(state.count);
+  return <button onClick={increment}>{state.count}</button>;
+}
+
+A) 0, 1, 2, ... (increments correctly)
+B) 0 (always)
+C) undefined
+D) TypeError  
+
+Answer: A) 0, 1, 2, ... (increments correctly)
+
+Explanation: The setState call with a new object updates state.count, triggering a re-render with the new value. Each click increments count, and console.log reflects the updated value. This tests state updates with objects.
+
+4. What is the output of the following code?
+
+import React, { useState, useEffect } from 'react';
+
+function App() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    setCount(count + 1);
+  }, []);
+  console.log(count);
+  return <div>{count}</div>;
+}
+
+A) 0
+B) 1
+C) Infinite loop
+D) TypeError 
+
+Answer: B) 1 
+
+Explanation: The useEffect with an empty dependency array runs once after mount, calling setCount(count + 1), updating count from 0 to 1 and triggering a re-render. console.log shows 0 (first render) and 1 (second render). No infinite loop occurs because the effect runs only once. This tests useEffect and state updates.
+
+5. What is the output of the following code?
+import React from 'react';
+
+function Child({ value }) {
+  console.log('Child render');
+  return <div>{value}</div>;
+}
+
+function Parent() {
+  const [count, setCount] = React.useState(0);
+  return (
+    <div>
+      <Child value={count} />
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+
+A) Child render (once)B) Child render (every click)C) No outputD) TypeError  
+Answer: B) Child render (every click)Explanation: Each time count updates, Parent re-renders, causing Child to re-render because its value prop changes. console.log('Child render') runs on every click. This tests React’s rendering behavior with props.
+
+6. What is the output of the following code?
+import React, { useMemo } from 'react';
+
+function App() {
+  const [count, setCount] = React.useState(0);
+  const expensive = useMemo(() => {
+    console.log('Compute');
+    return count * 2;
+  }, [count]);
+  return <button onClick={() => setCount(count + 1)}>{expensive}</button>;
+}
+
+A) Compute (once)B) Compute (every click)C) No outputD) TypeError  
+Answer: B) Compute (every click)Explanation: The useMemo hook recomputes expensive when count changes (dependency array [count]). Each click updates count, triggering a re-render and logging 'Compute'. This tests useMemo dependency behavior.
+
+7. What is the output of the following code?
+import React, { useCallback, useState } from 'react';
+
+function Child({ onClick }) {
+  console.log('Child render');
+  return <button onClick={onClick}>Click</button>;
+}
+
+function Parent() {
+  const [count, setCount] = useState(0);
+  const handleClick = useCallback(() => {}, [count]);
+  return (
+    <div>
+      <Child onClick={handleClick} />
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+
+A) Child render (once)B) Child render (every click)C) No outputD) TypeError  
+Answer: B) Child render (every click)Explanation: The useCallback hook creates a new handleClick function on every render because count is in its dependency array. This causes Child to re-render on each click due to a new onClick prop. This tests useCallback misuse.
+
+8. What is the output of the following code?
+import React, { useState } from 'react';
+
+function App() {
+  const [items, setItems] = useState([1, 2, 3]);
+  const addItem = () => {
+    items.push(4);
+    setItems(items);
+  };
+  return <button onClick={addItem}>{items.length}</button>;
+}
+
+A) 3, 4 (increments correctly)B) 3 (always)C) 4 (always)D) TypeError  
+Answer: B) 3 (always)Explanation: Mutating items directly with items.push(4) doesn’t create a new array, so setItems(items) doesn’t trigger a re-render because React compares the array reference (unchanged). Use setItems([...items, 4]) instead. This tests state immutability.
+
+9. What is the output of the following code?
+import React, { useEffect, useState } from 'react';
+
+function App() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCount((prev) => prev + 1);
+    }, 1000);
+  }, []);
+  return <div>{count}</div>;
+}
+
+A) 0, 1, 2, ... (increments every second)B) 0 (always)C) TypeErrorD) Infinite loop  
+Answer: A) 0, 1, 2, ... (increments every second)Explanation: The useEffect with an empty dependency array runs once, setting up a setInterval that increments count every second using the functional update form (prev => prev + 1). This tests useEffect with timers and state updates.
+
+10. What is the output of the following code?
+import React from 'react';
+
+function App() {
+  const [state, setState] = React.useState(0);
+  const handleClick = () => {
+    setState(state + 1);
+    setState(state + 1);
+  };
+  return <button onClick={handleClick}>{state}</button>;
+}
+
+A) 0, 2, 4, ...B) 0, 1, 2, ...C) 0 (always)D) TypeError  
+Answer: B) 0, 1, 2, ...Explanation: Multiple setState calls in the same event handler batch together, using the same state value (0 on first click). Only the last setState(state + 1) applies, incrementing state to 1. Use setState(prev => prev + 1) for consecutive updates. This tests state batching.
