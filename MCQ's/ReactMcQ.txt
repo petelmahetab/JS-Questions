@@ -1,0 +1,367 @@
+                                     React Revision: 25 MCQs 
+Part 1: Multiple Choice Questions (MCQs)
+
+1. What is the primary purpose of the useState hook in React?
+A) Manage component lifecycle
+B) Handle side effects in functional components
+C) Manage state in functional components
+D) Optimize rendering performance
+
+Correct Answer: C) Manage state in functional components
+
+Explanation: The useState hook is used to add state to functional components. It returns a state variable and a function to update it, allowing functional components to maintain and update their own state. Option A is incorrect as lifecycle management is handled by useEffect. Option B is related to useEffect, not useState. Option D is unrelated to useState's primary purpose.
+
+2. Which of the following is true about React fragments?
+A) They can only wrap a single child element
+B) They are used to group multiple elements without adding extra nodes to the DOM
+C) They must have a key prop when used in lists
+D) They are only available in class components
+
+Correct Answer: B) They are used to group multiple elements without adding extra nodes to the DOM
+
+Explanation: React fragments (<React.Fragment> or <>) allow grouping multiple elements without introducing additional DOM nodes, solving the issue of unnecessary wrapper divs. Option A is incorrect as fragments can wrap multiple children. Option C is incorrect as key props are needed for list items, not fragments themselves. Option D is incorrect as fragments are available in both class and functional components.
+
+3. What happens if you call setState multiple times in a single event handler?
+A) Each call triggers a separate re-render
+B) React batches the updates into a single re-render
+C) The last call overrides all previous calls
+D) It causes an infinite render loop
+
+Correct Answer: B) React batches the updates into a single re-render
+
+Explanation: In React, multiple setState calls within the same event handler (synchronous code) are batched into a single re-render for performance optimization. Option A is incorrect as batching prevents multiple re-renders. Option C is incorrect as all updates are merged, not overridden. Option D is incorrect as setState does not cause infinite loops unless misused (e.g., in render).
+
+4. Which hook is used to perform side effects in functional components?
+A) useStateB) useEffectC) useCallbackD) useMemo
+Correct Answer: B) useEffectExplanation: The useEffect hook is used to handle side effects like data fetching, subscriptions, or DOM manipulations in functional components. Option A is for state management. Option C (useCallback) memoizes functions, and Option D (useMemo) memoizes values, not side effects.
+
+5. What does the key prop do in a list of React elements?
+A) It uniquely identifies elements to optimize renderingB) It controls the styling of list itemsC) It triggers re-rendering of the entire listD) It is used to pass data to child components
+Correct Answer: A) It uniquely identifies elements to optimize renderingExplanation: The key prop helps React identify which items in a list have changed, been added, or removed, enabling efficient updates to the DOM. Option B is incorrect as key is unrelated to styling. Option C is incorrect as key optimizes rendering, not triggers it. Option D is incorrect as key is not for passing data.
+
+6. Which of the following is NOT a valid way to define a React component?
+A) Function declaration: function MyComponent() {}B) Arrow function: const MyComponent = () => {}C) Class declaration: class MyComponent extends React.Component {}D) Object literal: const MyComponent = { render: () => {} }
+Correct Answer: D) Object literal: const MyComponent = { render: () => {} }Explanation: React components can be defined as functions (A, B) or classes (C) that return JSX or null. An object literal (D) is not a valid React component, as React expects a function or class that can be invoked to render JSX. Option D would cause a runtime error.
+
+7. What will happen if a component’s useEffect hook has an empty dependency array?
+A) It runs on every renderB) It runs only once after the initial renderC) It never runsD) It runs only when the component unmounts
+Correct Answer: B) It runs only once after the initial renderExplanation: An empty dependency array in useEffect means the effect runs only once after the component mounts, similar to componentDidMount in class components. Option A is incorrect as it would require no dependency array. Option C is incorrect as the effect does run once. Option D is incorrect as cleanup (if provided) runs on unmount, not the effect itself.
+
+8. Which method is used to prevent unnecessary re-renders in class components?
+A) shouldComponentUpdateB) componentDidUpdateC) componentWillUnmountD) render
+Correct Answer: A) shouldComponentUpdateExplanation: The shouldComponentUpdate method allows developers to control whether a class component should re-render by returning true or false. Option B is for handling updates after rendering. Option C is for cleanup before unmounting. Option D is the method that defines the component’s UI, not for preventing re-renders.
+
+9. What is the purpose of the useCallback hook?
+A) Memoize a value to prevent recalculationB) Memoize a function to prevent re-creationC) Handle side effects in functional componentsD) Manage state updates
+Correct Answer: B) Memoize a function to prevent re-creationExplanation: The useCallback hook returns a memoized version of a callback function that only changes if its dependencies change, preventing unnecessary re-creations. Option A refers to useMemo. Option C refers to useEffect. Option D refers to useState.
+
+10. What is the output of ReactDOM.render(<App />, document.getElementById('root'))?
+A) Renders the App component into the DOM element with ID rootB) Creates a new React componentC) Updates the state of the App componentD) Removes the App component from the DOM
+Correct Answer: A) Renders the App component into the DOM element with ID rootExplanation: ReactDOM.render mounts the App component into the specified DOM element (root). Option B is incorrect as it doesn’t create a component. Option C is incorrect as it doesn’t involve state. Option D is incorrect as it renders, not removes, the component.
+
+11. Which of the following is true about React.memo?
+A) It memoizes the entire component treeB) It prevents re-rendering of a component if props are unchangedC) It is used to manage state in functional componentsD) It replaces the useEffect hook
+Correct Answer: B) It prevents re-rendering of a component if props are unchangedExplanation: React.memo is a higher-order component that memoizes a functional component, preventing re-renders if the props remain the same. Option A is incorrect as it only memoizes the specific component. Option C is incorrect as it’s unrelated to state. Option D is incorrect as it doesn’t replace useEffect.
+
+12. What is the default value of a prop if not provided?
+A) nullB) undefinedC) 0D) An empty string
+Correct Answer: B) undefinedExplanation: If a prop is not provided to a component, its value is undefined unless a default value is specified using defaultProps or default parameters. Options A, C, and D are incorrect as they are not the default behavior.
+
+13. Which of the following can cause a React component to re-render?
+A) A change in stateB) A change in propsC) A parent component re-renderingD) All of the above
+Correct Answer: D) All of the aboveExplanation: A component re-renders when its state changes (A), its props change (B), or its parent re-renders (C), unless optimized with tools like React.memo or shouldComponentUpdate. Thus, all options are correct.
+
+14. What is the purpose of the Context API in React?
+A) To manage component lifecycleB) To share data across components without prop drillingC) To optimize rendering performanceD) To handle HTTP requests
+Correct Answer: B) To share data across components without prop drillingExplanation: The Context API allows data (e.g., theme, user info) to be shared across the component tree without passing props manually at every level. Option A is incorrect as Context is unrelated to lifecycle. Option C is incorrect as it’s not for optimization. Option D is incorrect as HTTP requests are handled by libraries like Axios or Fetch.
+
+15. What will happen if you try to update state directly (e.g., this.state.count = 1)?
+A) The state updates and the component re-rendersB) The state updates but the component does not re-renderC) It causes an errorD) The state does not update, and the component does not re-render
+Correct Answer: D) The state does not update, and the component does not re-renderExplanation: Directly mutating this.state in class components or state variables in functional components does not trigger React’s state management system, so the component does not re-render, and the state change is not reflected in the UI. Always use setState or the state updater function. Option A and B are incorrect as direct mutation doesn’t trigger re-rendering. Option C is incorrect as it doesn’t cause an error, just unexpected behavior.
+
+16. Which hook is used to access the previous state or props?
+A) useRefB) useStateC) useEffectD) useMemo
+Correct Answer: A) useRefExplanation: The useRef hook can be used to store the previous state or props by updating a ref in a useEffect hook, as it persists across renders without causing re-renders. Option B manages state but doesn’t track previous values. Option C handles side effects, not previous values. Option D memoizes values but isn’t ideal for tracking previous states.
+
+17. What does the useReducer hook do?
+A) Manages complex state logic in functional componentsB) Memoizes functions to prevent re-creationC) Handles side effects like data fetchingD) Optimizes rendering performance
+Correct Answer: A) Manages complex state logic in functional componentsExplanation: The useReducer hook is used for managing complex state transitions in functional components, similar to Redux, by dispatching actions to a reducer function. Option B refers to useCallback. Option C refers to useEffect. Option D is unrelated to useReducer.
+
+18. Which of the following is true about controlled components?
+A) They manage their own state internallyB) Their value is controlled by React stateC) They cannot accept user inputD) They are only used in class components
+Correct Answer: B) Their value is controlled by React stateExplanation: Controlled components have their value managed by React state (e.g., via useState or this.state), with changes handled through event handlers like onChange. Option A describes uncontrolled components. Option C is incorrect as they accept input. Option D is incorrect as they work in both functional and class components.
+
+19. What is the purpose of the dangerouslySetInnerHTML prop?
+A) To optimize rendering performanceB) To directly set HTML content in a componentC) To handle form submissionsD) To manage component lifecycle
+Correct Answer: B) To directly set HTML content in a componentExplanation: The dangerouslySetInnerHTML prop allows setting raw HTML content in a component, but it’s risky due to potential XSS (cross-site scripting) attacks. Option A is incorrect as it’s not for optimization. Option C is unrelated to forms. Option D is unrelated to lifecycle management.
+
+20. What is the output of {...props} in a component?
+A) Spreads all props to the component’s childrenB) Merges multiple state objectsC) Creates a new component instanceD) Triggers a re-render
+Correct Answer: A) Spreads all props to the component’s childrenExplanation: The spread operator ({...props}) passes all props received by a component to its children, useful for proxying props. Option B is incorrect as it’s unrelated to state. Option C is incorrect as it doesn’t create components. Option D is incorrect as it doesn’t trigger re-renders.
+
+21. Which lifecycle method is replaced by useEffect in functional components?
+A) renderB) componentDidMountC) shouldComponentUpdateD) setState
+Correct Answer: B) componentDidMountExplanation: The useEffect hook with an empty dependency array mimics componentDidMount by running once after the component mounts. It can also replace componentDidUpdate and componentWillUnmount with appropriate dependencies and cleanup. Option A is incorrect as render is not a lifecycle method replaced by hooks. Option C is handled by React.memo, not useEffect. Option D is not a lifecycle method.
+
+22. What happens if you forget to include a key prop in a list?
+A) React throws an errorB) The list renders correctly but with performance issuesC) The list does not renderD) The list items are duplicated
+Correct Answer: B) The list renders correctly but with performance issuesExplanation: Omitting the key prop in a list causes React to rely on index-based reconciliation, which can lead to performance issues and incorrect DOM updates, especially when items are added, removed, or reordered. Option A is incorrect as React only warns, not errors. Option C is incorrect as the list still renders. Option D is incorrect as duplication is not the primary issue.
+
+23. Which of the following is a higher-order component (HOC)?
+A) A component that renders JSX directlyB) A function that takes a component and returns a new componentC) A component that uses hooksD) A component that manages state
+Correct Answer: B) A function that takes a component and returns a new componentExplanation: An HOC is a function that takes a component as an argument and returns a new component with enhanced functionality, used for code reuse. Option A describes regular components. Option C is unrelated to HOCs. Option D is too vague, as HOCs are not specifically about state management.
+
+24. What is the purpose of the useMemo hook?
+A) To memoize a functionB) To memoize a computed valueC) To handle side effectsD) To manage state
+Correct Answer: B) To memoize a computed valueExplanation: The useMemo hook memoizes a computed value, preventing expensive calculations on every render unless dependencies change. Option A refers to useCallback. Option C refers to useEffect. Option D refers to useState.
+
+25. What happens if you pass an async function directly to useEffect?
+A) It works correctlyB) It causes a warning and may not work as expectedC) It throws an errorD) It prevents the component from rendering
+Correct Answer: B) It causes a warning and may not work as expectedExplanation: Passing an async function directly to useEffect causes a warning because useEffect expects a cleanup function or nothing, not a Promise. To use async operations, wrap the async code in a regular function inside useEffect. Option A is incorrect as it leads to issues. Option C is incorrect as it’s a warning, not an error. Option D is incorrect as rendering is unaffected.
+
+Part 2: Output-Based MCQs
+For each of the following React code snippets, determine the output or behavior. Each question includes a code block, multiple-choice options, and a detailed explanation.
+26. What is the output of the following code?
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  const increment = () => {
+    setCount(count + 1);
+    setCount(count + 1);
+  };
+
+  return <button onClick={increment}>{count}</button>;
+}
+
+A) Clicking the button increments count by 2B) Clicking the button increments count by 1C) Clicking the button causes an errorD) The button does not respond to clicks
+Correct Answer: B) Clicking the button increments count by 1Explanation: React batches multiple setCount calls within the same event handler. The second setCount(count + 1) does not use the updated count from the first call because count is still the same value during the synchronous execution. To increment by 2, use the updater function: setCount(prev => prev + 1); setCount(prev => prev + 1). Option A is incorrect due to batching. Option C is incorrect as no error occurs. Option D is incorrect as the button responds.
+
+27. What is the output of the following code?
+import React, { useEffect } from 'react';
+
+function EffectComponent() {
+  useEffect(() => {
+    console.log('Effect ran');
+  }, []);
+
+  return <div>Hello</div>;
+}
+
+A) Logs Effect ran on every renderB) Logs Effect ran only once after mountC) Logs nothingD) Throws an error
+Correct Answer: B) Logs Effect ran only once after mountExplanation: The useEffect hook with an empty dependency array ([]) runs only once after the component mounts, similar to componentDidMount. Option A is incorrect as it would require no dependency array. Option C is incorrect as the effect does run. Option D is incorrect as no error occurs.
+
+28. What is the output of the following code?
+import React from 'react';
+
+function App() {
+  const name = undefined;
+  return <div>{name || 'Default'}</div>;
+}
+
+A) Renders undefinedB) Renders DefaultC) Renders nothingD) Throws an error
+Correct Answer: B) Renders DefaultExplanation: The || operator returns the right operand ('Default') if the left operand (name) is falsy, which undefined is. Thus, the output is Default. Option A is incorrect as undefined is not rendered due to the || operator. Option C is incorrect as something is rendered. Option D is incorrect as no error occurs.
+
+29. What is the output of the following code?
+import React, { useState } from 'react';
+
+function Toggle() {
+  const [flag, setFlag] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setFlag(!flag)}>Toggle</button>
+      {flag && <p>Visible</p>}
+    </div>
+  );
+}
+
+A) Clicking the button toggles the text Visible on and offB) Clicking the button shows Visible once and never hides itC) Clicking the button causes an errorD) The text Visible is always shown
+Correct Answer: A) Clicking the button toggles the text Visible on and offExplanation: The flag state toggles between true and false on each button click, and the conditional rendering {flag && <p>Visible</p>} shows or hides the paragraph accordingly. Option B is incorrect as the text can be hidden. Option C is incorrect as no error occurs. Option D is incorrect as the text is initially hidden (flag is false).
+
+30. What is the output of the following code?
+import React from 'react';
+
+function Child({ value }) {
+  return <div>{value}</div>;
+}
+
+Child.defaultProps = {
+  value: 'Default',
+};
+
+function App() {
+  return <Child />;
+}
+
+A) Renders undefinedB) Renders DefaultC) Renders nothingD) Throws an error
+Correct Answer: B) Renders DefaultExplanation: The Child component has a defaultProps object that sets value to 'Default' when no value prop is provided. Since App passes no value prop, the default is used. Option A is incorrect as defaultProps prevents undefined. Option C is incorrect as something is rendered. Option D is incorrect as no error occurs.
+
+31. What is the output of the following code?
+import React, { useEffect, useState } from 'react';
+
+function Timer() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setCount(count + 1), 1000);
+    return () => clearInterval(id);
+  }, [count]);
+
+  return <div>{count}</div>;
+}
+
+A) Increments count every secondB) Increments count once and stopsC) Causes an infinite render loopD) Throws an error
+Correct Answer: C) Causes an infinite render loopExplanation: The useEffect hook depends on count, and setCount updates count, triggering a new render and a new useEffect call, creating a new interval. This leads to an infinite loop of renders and interval creations. To fix, remove count from the dependency array or use an updater function: setCount(prev => prev + 1). Option A is incorrect due to the loop. Option B is incorrect as it doesn’t stop. Option D is incorrect as no error is thrown.
+
+32. What is the output of the following code?
+import React from 'react';
+
+function App() {
+  const items = ['A', 'B', 'C'];
+  return (
+    <ul>
+      {items.map(item => (
+        <li>{item}</li>
+      ))}
+    </ul>
+  );
+}
+
+A) Renders a list with items A, B, CB) Renders a list but with a warning about missing key propsC) Throws an error due to missing key propsD) Renders nothing
+Correct Answer: B) Renders a list but with a warning about missing key propsExplanation: The map function creates a list of <li> elements, but without a key prop, React issues a warning in the console about missing keys, which can cause performance issues. The list still renders correctly. Option A is incorrect due to the warning. Option C is incorrect as it’s a warning, not an error. Option D is incorrect as the list renders.
+
+33. What is the output of the following code?
+import React, { useState } from 'react';
+
+function Input() {
+  const [value, setValue] = useState('');
+
+  return (
+    <input
+      value={value}
+      onChange={e => setValue(e.target.value)}
+    />
+  );
+}
+
+A) The input field is controlled and updates with user inputB) The input field is uncontrolled and does not updateC) The input field causes an errorD) The input field is read-only
+Correct Answer: A) The input field is controlled and updates with user inputExplanation: This is a controlled input, where the value is tied to the value state, and onChange updates the state with user input. The input functions normally. Option B is incorrect as it’s controlled. Option C is incorrect as no error occurs. Option D is incorrect as it’s not read-only (no readOnly prop).
+
+34. What is the output of the following code?
+import React from 'react';
+
+const Memoized = React.memo(({ value }) => {
+  console.log('Rendering');
+  return <div>{value}</div>;
+});
+
+function App() {
+  const [count, setCount] = React.useState(0);
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <Memoized value="Hello" />
+    </div>
+  );
+}
+
+A) Logs Rendering on every button clickB) Logs Rendering only once after mountC) Logs Rendering twice after mountD) Throws an error
+Correct Answer: B) Logs Rendering only once after mountExplanation: React.memo prevents Memoized from re-rendering if its props (value) don’t change. Since value is always "Hello", it only renders once. Option A is incorrect due to memoization. Option C is incorrect as it renders once. Option D is incorrect as no error occurs.
+
+35. What is the output of the following code?
+import React, { useState } from 'react';
+
+function App() {
+  const [state, setState] = useState({ count: 0 });
+
+  const increment = () => {
+    setState({ count: state.count + 1 });
+  };
+
+  return <button onClick={increment}>{state.count}</button>;
+}
+
+A) Increments count on each clickB) Does not increment countC) Causes an errorD) Increments count but does not re-render
+Correct Answer: A) Increments count on each clickExplanation: The setState call updates the state object with a new object containing the incremented count. React triggers a re-render, and the button displays the updated count. Option B is incorrect as the state updates. Option C is incorrect as no error occurs. Option D is incorrect as the component re-renders.
+
+36. What is the output of the following code?
+import React, { useEffect } from 'react';
+
+function App() {
+  useEffect(() => {
+    console.log('Effect');
+    return () => console.log('Cleanup');
+  });
+
+  return <div>Hello</div>;
+}
+
+A) Logs Effect on every render, Cleanup on unmountB) Logs Effect and Cleanup on every renderC) Logs Effect once, Cleanup neverD) Logs nothing
+Correct Answer: A) Logs Effect on every render, Cleanup on unmountExplanation: With no dependency array, useEffect runs after every render, and its cleanup function runs before the next effect or on unmount. Option B is incorrect as cleanup doesn’t run on every render. Option C is incorrect as cleanup runs on unmount. Option D is incorrect as logs occur.
+
+37. What is the output of the following code?
+import React from 'react';
+
+function App() {
+  return (
+    <>
+      <p>First</p>
+      <p>Second</p>
+    </>
+  );
+}
+
+A) Renders First and Second without a wrapper divB) Renders First and Second inside a divC) Throws an error due to multiple childrenD) Renders nothing
+Correct Answer: A) Renders First and Second without a wrapper divExplanation: The short syntax fragment (<>) groups multiple elements without adding a wrapper DOM node. Option B is incorrect as no div is added. Option C is incorrect as fragments allow multiple children. Option D is incorrect as the paragraphs render.
+
+38. What is the output of the following code?
+import React, { useState, useCallback } from 'react';
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  const handleClick = useCallback(() => {
+    setCount(count + 1);
+  }, [count]);
+
+  return <button onClick={handleClick}>{count}</button>;
+}
+
+A) Increments count on each clickB) Does not increment countC) Causes an infinite render loopD) Throws an error
+Correct Answer: A) Increments count on each clickExplanation: The useCallback hook memoizes the handleClick function, but since count is in its dependency array, it creates a new function when count changes. The setCount call updates count, triggering a re-render. Option B is incorrect as the state updates. Option C is incorrect as there’s no loop. Option D is incorrect as no error occurs.
+
+39. What is the output of the following code?
+import React from 'react';
+
+class App extends React.Component {
+  state = { count: 0 };
+
+  componentDidMount() {
+    this.setState({ count: this.state.count + 1 });
+  }
+
+  render() {
+    return <div>{this.state.count}</div>;
+  }
+}
+
+A) Renders 0B) Renders 1C) Renders 2D) Causes an error
+Correct Answer: B) Renders 1Explanation: The componentDidMount lifecycle method runs after the initial render, updating the count state to 1, which triggers a re-render. The final output is 1. Option A is incorrect as the state updates. Option C is incorrect as it only increments once. Option D is incorrect as no error occurs.
+
+40. What is the output of the following code?
+import React, { useState, useEffect } from 'react';
+
+function App() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    setData('Hello');
+  }, []);
+
+  return <div>{data}</div>;
+}
+
+A) Renders nullB) Renders HelloC) Renders nothingD) Throws an error
+Correct Answer: B) Renders HelloExplanation: The useEffect hook with an empty dependency array runs once after mount, setting data to 'Hello', which triggers a re-render. The final output is Hello. Option A is incorrect as the state updates. Option C is incorrect as something is rendered. Option D is incorrect as no error occurs.

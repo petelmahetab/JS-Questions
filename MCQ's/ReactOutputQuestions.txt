@@ -90,14 +90,15 @@ Answer: B) 1
 
 Explanation: The useEffect with an empty dependency array runs once after mount, calling setCount(count + 1), updating count from 0 to 1 and triggering a re-render. console.log shows 0 (first render) and 1 (second render). No infinite loop occurs because the effect runs only once. This tests useEffect and state updates.
 
+
 5. What is the output of the following code?
+
 import React from 'react';
 
 function Child({ value }) {
   console.log('Child render');
   return <div>{value}</div>;
 }
-
 function Parent() {
   const [count, setCount] = React.useState(0);
   return (
@@ -108,10 +109,18 @@ function Parent() {
   );
 }
 
-A) Child render (once)B) Child render (every click)C) No outputD) TypeError  
-Answer: B) Child render (every click)Explanation: Each time count updates, Parent re-renders, causing Child to re-render because its value prop changes. console.log('Child render') runs on every click. This tests React’s rendering behavior with props.
+A) Child render (once)
+B) Child render (every click)
+C) No output
+D) TypeError  
+
+Answer: B) Child render (every click)
+
+Explanation: Each time count updates, Parent re-renders, causing Child to re-render because its value prop changes. console.log('Child render') runs on every click. This tests React’s rendering behavior with props.
+
 
 6. What is the output of the following code?
+
 import React, { useMemo } from 'react';
 
 function App() {
@@ -123,10 +132,17 @@ function App() {
   return <button onClick={() => setCount(count + 1)}>{expensive}</button>;
 }
 
-A) Compute (once)B) Compute (every click)C) No outputD) TypeError  
-Answer: B) Compute (every click)Explanation: The useMemo hook recomputes expensive when count changes (dependency array [count]). Each click updates count, triggering a re-render and logging 'Compute'. This tests useMemo dependency behavior.
+A) Compute (once)
+B) Compute (every click)
+C) No output
+D) TypeError 
+
+Answer: B) Compute (every click)
+Explanation: The useMemo hook recomputes expensive when count changes (dependency array [count]). Each click updates count, triggering a re-render and logging 'Compute'. This tests useMemo dependency behavior.
+
 
 7. What is the output of the following code?
+
 import React, { useCallback, useState } from 'react';
 
 function Child({ onClick }) {
@@ -137,6 +153,7 @@ function Child({ onClick }) {
 function Parent() {
   const [count, setCount] = useState(0);
   const handleClick = useCallback(() => {}, [count]);
+
   return (
     <div>
       <Child onClick={handleClick} />
@@ -145,8 +162,14 @@ function Parent() {
   );
 }
 
-A) Child render (once)B) Child render (every click)C) No outputD) TypeError  
-Answer: B) Child render (every click)Explanation: The useCallback hook creates a new handleClick function on every render because count is in its dependency array. This causes Child to re-render on each click due to a new onClick prop. This tests useCallback misuse.
+A) Child render (once)
+B) Child render (every click)
+C) No output
+D) TypeError 
+
+Answer: B) Child render (every click)
+Explanation: The useCallback hook creates a new handleClick function on every render because count is in its dependency array. This causes Child to re-render on each click due to a new onClick prop. This tests useCallback misuse.
+
 
 8. What is the output of the following code?
 import React, { useState } from 'react';
