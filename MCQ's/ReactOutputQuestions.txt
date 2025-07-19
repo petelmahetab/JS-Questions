@@ -99,6 +99,7 @@ function Child({ value }) {
   console.log('Child render');
   return <div>{value}</div>;
 }
+
 function Parent() {
   const [count, setCount] = React.useState(0);
   return (
