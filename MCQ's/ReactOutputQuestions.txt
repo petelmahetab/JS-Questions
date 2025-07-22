@@ -184,10 +184,17 @@ function App() {
   return <button onClick={addItem}>{items.length}</button>;
 }
 
-A) 3, 4 (increments correctly)B) 3 (always)C) 4 (always)D) TypeError  
-Answer: B) 3 (always)Explanation: Mutating items directly with items.push(4) doesn’t create a new array, so setItems(items) doesn’t trigger a re-render because React compares the array reference (unchanged). Use setItems([...items, 4]) instead. This tests state immutability.
+A) 3, 4 (increments correctly)
+B) 3 (always)
+C) 4 (always)
+D) TypeError  
+
+Answer: B) 3 (always)
+
+Explanation: Mutating items directly with items.push(4) doesn’t create a new array, so setItems(items) doesn’t trigger a re-render because React compares the array reference (unchanged). Use setItems([...items, 4]) instead. This tests state immutability.
 
 9. What is the output of the following code?
+
 import React, { useEffect, useState } from 'react';
 
 function App() {
@@ -200,10 +207,16 @@ function App() {
   return <div>{count}</div>;
 }
 
-A) 0, 1, 2, ... (increments every second)B) 0 (always)C) TypeErrorD) Infinite loop  
-Answer: A) 0, 1, 2, ... (increments every second)Explanation: The useEffect with an empty dependency array runs once, setting up a setInterval that increments count every second using the functional update form (prev => prev + 1). This tests useEffect with timers and state updates.
+A) 0, 1, 2, ... (increments every second)
+B) 0 (always)
+C) TypeError
+D) Infinite loop  
+
+Answer: A) 0, 1, 2, ... (increments every second)
+Explanation: The useEffect with an empty dependency array runs once, setting up a setInterval that increments count every second using the functional update form (prev => prev + 1). This tests useEffect with timers and state updates.
 
 10. What is the output of the following code?
+
 import React from 'react';
 
 function App() {
@@ -213,7 +226,15 @@ function App() {
     setState(state + 1);
   };
   return <button onClick={handleClick}>{state}</button>;
-}
+}  
 
-A) 0, 2, 4, ...B) 0, 1, 2, ...C) 0 (always)D) TypeError  
-Answer: B) 0, 1, 2, ...Explanation: Multiple setState calls in the same event handler batch together, using the same state value (0 on first click). Only the last setState(state + 1) applies, incrementing state to 1. Use setState(prev => prev + 1) for consecutive updates. This tests state batching.
+A) 0, 2, 4, ...
+B) 0, 1, 2, ...
+C) 0 (always)
+D) TypeError  
+
+Answer: B) 0, 1, 2, ...
+Explanation: Multiple setState calls in the same event handler batch together, using the same state value (0 on first click). Only the last setState(state + 1) applies, incrementing state to 1. Use setState(prev => prev + 1) for consecutive updates. This tests state batching.
+
+
+                                                ***************************************************** 
