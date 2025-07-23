@@ -1,150 +1,487 @@
-                                                           Web Development Interview MCQ Test (2024-2025)
-This test contains 20 multiple-choice questions based on recent web development interview questions asked at big tech firms in 2024 and 2025. Topics include HTML, CSS, JavaScript, React, web performance, APIs, and system design. Select the correct option for each question and submit your answers as a list (e.g., "1: B, 2: C, ..."). You’ll receive feedback on whether each answer is correct or incorrect, along with explanations.
+                                                    Essential Developer Interview Questions (2025)
+These 25 output-based questions test critical knowledge for developers in intermediate networking, deployments (CI/CD, AWS, Azure), and production-level design patterns. Each question includes a code snippet or scenario, four answer options, the correct answer, and an explanation to prepare you for technical interviews.
 
-1. What is the purpose of the HTML <meta> tag with the viewport attribute?
-A) To define the character encoding of the document
-B) To set the initial zoom level and width for responsive design
-C) To specify the document’s title in the browser tab
-D) To link external CSS files  
-=> B
+1. What is the output of the following React code with a network fetch?
 
-2. In CSS, what does the box-sizing: border-box; property do?
-A) Excludes padding and border from the element’s total width and height
-B) Includes padding and border in the element’s total width and height
-C) Sets the element to use flexbox layout
-D) Centers the element horizontally  
-=> B
+import React, { useState, useEffect } from 'react';
 
-3. What is the difference between == and === in JavaScript?
-A) == compares values after type coercion, === compares value and type
-B) == is used for objects, === is used for primitives
-C) == checks reference equality, === checks value equality
-D) == is deprecated, === is the only valid comparison operator  
-=>A
+function App() {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    fetch('https://api.example.com/data')
+      .then((res) => res.json())
+      .then((result) => {
+        setData(result);
+        console.log(result.value);
+      });
+  }, []);
+  return <div>{data ? data.value : 'Loading'}</div>;
+}
 
-4. What does the JavaScript async keyword do when used with a function?
-A) Makes the function execute synchronously
-B) Ensures the function returns a Promise
-C) Prevents the function from being called more than once
-D) Automatically catches errors in the function  
-=>B
+A) Loading, then fetched data
+B) undefined
+C) TypeError
+D) null
+Answer: A) Loading, then fetched data
+Explanation: The useEffect runs once, fetching data and updating data. The component renders 'Loading' until the data is set, then displays result.value. The console logs the fetched value. This tests async fetching, common in MERN apps with REST APIs.
 
-5. In React, what is the purpose of the useEffect hook?
-A) To manage state in functional components
-B) To handle side effects like data fetching or DOM manipulation
-C) To optimize component rendering
-D) To replace the useState hook for complex state.
-=>B
+2. What happens when this Express route handles a request?
 
-6. What is the purpose of the HTTP CORS mechanism?
-A) To compress HTTP requests for faster transmission
-B) To allow or restrict cross-origin resource sharing
-C) To authenticate users across different domains
-D) To cache resources on the client side.
-=>B
+const express = require('express');
+const app = express();
 
-7. Which CSS property is used to create smooth scrolling behavior for a webpage?
-A) scroll-behavior: smooth;
-B) scroll-snap-type: mandatory;
-C) overflow: auto;
-D) transition: scroll 0.3s;  
-=>A
+app.get('/api/user', (req, res) => {
+  console.log('Request received');
+  res.json({ user: 'John' });
+});
 
-8. What is the output of the following JavaScript code?
-console.log(typeof null);
+app.listen(3000, () => console.log('Server running'));
 
-A) "null"
-B) "undefined"
-C) "object"
-D) "string"  
-=>C
+A) Server running, Request received (on request)
+B) Request received, Server running
+C) TypeError
+D) No output
+Answer: A) Server running, Request received (on request)
+Explanation: The server starts, logging 'Server running'. Each /api/user request logs 'Request received' and returns { user: 'John' }. This tests basic Express routing, a key MERN backend skill.
 
-9. In a REST API, what is the purpose of the PUT method?
-A) To retrieve data from the server
-B) To create a new resource
-C) To update an existing resource or create if it doesn’t exist
-D) To delete a resource  
-=>C
+3. What is logged in this Node.js TCP connection?
 
-10. In React, what is the Virtual DOM?
-A) A lightweight copy of the actual DOM used for efficient updates
-B) A database for storing component state
-C) A tool for debugging React components
-D) A replacement for CSS in React applications 
-=>A
+const net = require('net');
 
-11. What does the CSS flex: 1; shorthand property represent?
-A) flex-grow: 1; flex-shrink: 0; flex-basis: auto;
-B) flex-grow: 1; flex-shrink: 1; flex-basis: 0%;
-C) flex-grow: 0; flex-shrink: 1; flex-basis: auto;
-D) flex-grow: 1; flex-shrink: 0; flex-basis: 100%;  
-=>B
+const server = net.createServer((socket) => {
+  console.log('Client connected');
+  socket.on('data', (data) => console.log(data.toString()));
+});
 
-12. What is the purpose of the JavaScript debounce function in web development?
-A) To delay the execution of a function until after a specified time of inactivity
-B) To execute a function immediately and prevent further calls
-C) To cache function results for faster execution
-D) To throttle API requests to a server  
-=>A
+server.listen(8080, () => console.log('TCP server started'));
 
-13. Which HTML attribute is used to provide a unique identifier for an element?
-A) class
-B) id
-C) name
-D) data 
-=>B
+A) TCP server started, Client connected (on connection)
+B) Client connected, TCP server started
+C) TypeError
+D) No output
+Answer: A) TCP server started, Client connected (on connection)
+Explanation: The TCP server starts, logging 'TCP server started'. On client connection, it logs 'Client connected' and logs any data sent. This tests intermediate networking with Node.js TCP servers.
 
-14. In JavaScript, what does the event.preventDefault() method do?
-A) Stops the event from bubbling up the DOM tree
-B) Prevents the default behavior of an event (e.g., form submission)
-C) Cancels all events on the page
-D) Triggers a custom event  
-=>B
+4. What is the outcome of this DNS resolution in Node.js?
+const dns = require('dns');
 
-15. What is the purpose of the useMemo hook in React?
-A) To memoize expensive computations and prevent unnecessary recalculations
-B) To manage component lifecycle methods
-C) To handle asynchronous operations
-D) To replace useState for complex state  
-=>A
+dns.resolve('example.com', (err, addresses) => {
+  if (err) {
+    console.log('Error:', err.message);
+    return;
+  }
+  console.log(addresses);
+});
 
-16. In CSS, what does the position: sticky; property do?
-A) Fixes an element in place relative to the viewport
-B) Positions an element relative to its nearest scrolling ancestor
-C) Aligns an element to the center of its parent
-D) Hides an element until scrolled into view  
-=>B
+A) Array of IP addresses (e.g., ['93.184.216.34'])
+B) Error: queryA ENOTFOUND example.com
+C) undefined
+D) TypeError
+Answer: A) Array of IP addresses (e.g., ['93.184.216.34'])
+Explanation: The dns.resolve queries the DNS for example.com, returning an array of IP addresses if successful. Errors occur only for invalid domains. This tests DNS resolution, a core networking concept.
 
-17. What is the purpose of the fetch API in JavaScript?
-A) To manipulate the DOM directly
-B) To make HTTP requests to retrieve or send data
-C) To store data in the browser’s local storage
-D) To parse XML documents  
-=>B
+5. What is logged in this React app with CORS?
+import React, { useEffect } from 'react';
 
-18. In a system design interview, what is a common approach to handle high traffic on a web application?
-A) Use a single server to handle all requests
-B) Implement load balancing with multiple servers
-C) Disable caching to ensure fresh data
-D) Store all data in the client’s browser  
-=>B
+function App() {
+  useEffect(() => {
+    fetch('http://localhost:3000/api/data')
+      .then((res) => res.json())
+      .catch((err) => console.log('Error:', err.message));
+  }, []);
+  return <div>Test</div>;
+}
 
-19. What is the output of the following JavaScript code?
-const arr = [1, 2, 3];
-console.log(arr.map(x => x * 2));
+A) Error: Network Error (if CORS not configured)
+B) Fetched data
+C) No output
+D) TypeError
+Answer: A) Error: Network Error (if CORS not configured)
+Explanation: Without CORS configured on the backend, the cross-origin request fails, logging a Network Error. 
 
-A) [1, 2, 3]
-B) [2, 4, 6]
-C) [3, 6, 9]
-D) [1, 4, 9]  
-=>B
+6. What is the output of this Express CORS setup?
 
-20. What is the purpose of the rel attribute in an HTML <a> tag?
-A) To specify the relationship between the current document and the linked resource
-B) To define the anchor’s text content
-C) To set the target window for the link
-D) To apply CSS styles to the link  
-=>A
+const express = require('express');
+const cors = require('cors');
+const app = express();
 
+app.use(cors({ origin: 'http://localhost:3001' }));
 
-                                                                                        Thank U
+app.get('/api/data', (req, res) => {
+  console.log('Data requested');
+  res.json({ value: 'Test' });
+});
+
+app.listen(3000, () => console.log('Server running'));
+
+A) Server running, Data requested (on valid request)
+B) Error: CORS policy blocked
+C) TypeError
+D) No output
+Answer: A) Server running, Data requested (on valid request)
+Explanation: The server starts, logging 'Server running'. Requests from http://localhost:3001 are allowed by CORS, logging 'Data requested' and returning data. This tests CORS configuration, a deployment essential.
+
+7. What is logged in this CI/CD environment variable setup?
+
+import React, { useEffect, useState } from 'react';
+
+function App() {
+  const [env, setEnv] = useState(null);
+  useEffect(() => {
+    const envVar = process.env.REACT_APP_ENV;
+    setEnv(envVar);
+    console.log(envVar);
+  }, []);
+  return <div>{env || 'No env'}</div>;
+}
+
+A) production (in AWS Amplify CI/CD)
+B) undefined
+C) TypeError
+D) No env
+Answer: A) production (in AWS Amplify CI/CD)
+Explanation: In an AWS Amplify CI/CD pipeline, REACT_APP_ENV is set to 'production' in production builds, logged and displayed. This tests environment variables in cloud deployments, as seen in your Vercel queries (March 8, 2025).
+
+8. What is the outcome of this Azure API fetch?
+import React, { useState, useEffect } from 'react';
+
+function App() {
+  const [config, setConfig] = useState(null);
+  useEffect(() => {
+    fetch('/api/config')
+      .then((res) => res.json())
+      .then((data) => {
+        setConfig(data);
+        console.log(data.env);
+      });
+  }, []);
+  return <div>{config ? config.env : 'Loading'}</div>;
+}
+
+A) production (in Azure Static Web Apps)
+B) undefined
+C) TypeError
+D) Loading
+Answer: A) production (in Azure Static Web Apps)
+Explanation: In Azure Static Web Apps, a CI/CD pipeline (e.g., GitHub Actions) sets data.env to 'production'. The fetch logs and displays this value. This tests cloud API integration, a key deployment skill.
+
+9. What is logged in this Singleton pattern implementation?
+
+class Singleton {
+  constructor() {
+    if (Singleton.instance) return Singleton.instance;
+    Singleton.instance = this;
+    this.value = 'Singleton';
+  }
+}
+
+const obj1 = new Singleton();
+const obj2 = new Singleton();
+console.log(obj1 === obj2, obj1.value);
+
+A) true, Singleton
+B) false, Singleton
+C) TypeError
+D) undefined
+Answer: A) true, Singleton
+Explanation: The Singleton pattern ensures one instance. obj1 and obj2 reference the same instance, so obj1 === obj2 is true, and obj1.value is 'Singleton'. This tests a production-level design pattern.
+
+10. What is the output of this Factory pattern?
+class UserFactory {
+  static createUser(type) {
+    if (type === 'admin') return { role: 'Admin' };
+    return { role: 'User' };
+  }
+}
+
+const user = UserFactory.createUser('admin');
+console.log(user.role);
+
+A) Admin
+B) User
+C) TypeErrorD) undefined
+Answer: A) AdminExplanation: The Factory pattern creates objects based on conditions. createUser('admin') returns { role: 'Admin' }, logged as 'Admin'. This tests a design pattern for scalable object creation.
+
+11. What is logged in this Circuit Breaker pattern?
+class CircuitBreaker {
+  constructor() {
+    this.state = 'CLOSED';
+  }
+  request() {
+    if (this.state === 'OPEN') {
+      console.log('Request blocked');
+      return;
+    }
+    console.log('Request processed');
+  }
+  trip() {
+    this.state = 'OPEN';
+  }
+}
+
+const cb = new CircuitBreaker();
+cb.request();
+cb.trip();
+cb.request();
+
+A) Request processed, Request blocked
+B) Request blocked, Request processed
+C) TypeError
+D) No output
+Answer: A) Request processed, Request blocked
+Explanation: The Circuit Breaker pattern prevents repeated failed requests. The first request() logs 'Request processed' (CLOSED state). After trip(), the state is OPEN, so the second request() logs 'Request blocked'. This tests a production resilience pattern.
+
+12. What is the output of this load balancer simulation?
+
+function loadBalancer(servers, requestId) {
+  const index = requestId % servers.length;
+  console.log(`Routing to ${servers[index]}`);
+  return servers[index];
+}
+
+loadBalancer(['server1', 'server2', 'server3'], 4);
+
+A) Routing to server2
+B) Routing to server1
+C) TypeError
+D) undefined
+Answer: A) Routing to server2
+Explanation: The load balancer uses modulo to distribute requests. 4 % 3 = 1, so it routes to servers[1] ('server2'). This tests intermediate networking for load distribution.
+
+13. What is logged in this WebSocket connection?
+const WebSocket = require('ws');
+
+const server = new WebSocket.Server({ port: 8080 });
+server.on('connection', (ws) => {
+  console.log('Client connected');
+  ws.on('message', (msg) => console.log(`Received: ${msg}`));
+});
+
+console.log('WebSocket server started');
+
+A) WebSocket server started, Client connected (on connection)
+B) Client connected, WebSocket server started
+C) TypeError
+D) No output
+Answer: A) WebSocket server started, Client connected (on connection)
+Explanation: The WebSocket server starts, logging 'WebSocket server started'. On client connection, it logs 'Client connected' and handles messages. This tests WebSocket networking, relevant to your Socket.IO queries (March 21, 2025).
+
+14. What is the outcome of this AWS Lambda handler?
+
+exports.handler = async (event) => {
+  console.log('Lambda invoked');
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: 'Success' }),
+  };
+};
+
+A) Lambda invoked, { statusCode: 200, body: "{"message":"Success"}" }
+B) TypeError
+C) undefined
+D) No output
+Answer: A) Lambda invoked, { statusCode: 200, body: "{"message":"Success"}" }
+Explanation: The AWS Lambda handler logs 'Lambda invoked' and returns a response object. This tests serverless deployment, a modern cloud pattern in AWS.
+
+15. What is logged in this Azure Function?
+module.exports = async function (context, req) {
+  context.log('Function triggered');
+  return {
+    status: 200,
+    body: { message: 'Hello Azure' },
+  };
+};
+
+A) Function triggered, { status: 200, body: { message: 'Hello Azure' } }B) TypeErrorC) undefinedD) No output
+Answer: A) Function triggered, { status: 200, body: { message: 'Hello Azure' } }Explanation: The Azure Function logs 'Function triggered' and returns a response. This tests serverless deployment in Azure, a key cloud skill.
+
+16. What is the output of this Observer pattern?
+class Subject {
+  constructor() {
+    this.observers = [];
+  }
+  addObserver(observer) {
+    this.observers.push(observer);
+  }
+  notify(data) {
+    this.observers.forEach((obs) => obs.update(data));
+  }
+}
+
+class Observer {
+  update(data) {
+    console.log(`Update: ${data}`);
+  }
+}
+
+const subject = new Subject();
+const obs = new Observer();
+subject.addObserver(obs);
+subject.notify('Event');
+
+A) Update: EventB) TypeErrorC) undefinedD) No output
+Answer: A) Update: EventExplanation: The Observer pattern notifies subscribers of events. The notify method calls update on the observer, logging 'Update: Event'. This tests a design pattern for event-driven systems.
+
+17. What is logged in this CI/CD pipeline script (GitHub Actions)?
+name: Deploy
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo "Building app"
+      - run: npm install
+      - run: npm run build
+
+A) Building app (on push)B) TypeErrorC) undefinedD) No output
+Answer: A) Building app (on push)Explanation: The GitHub Actions workflow runs on push, executing steps including echo "Building app", which logs to the console. This tests CI/CD pipelines, as used in your Vercel deployments (March 8, 2025).
+
+18. What is the outcome of this rate limiter middleware?
+const rateLimit = require('express-rate-limit');
+const express = require('express');
+const app = express();
+
+app.use(rateLimit({ windowMs: 60000, max: 2 }));
+app.get('/api', (req, res) => {
+  console.log('API called');
+  res.send('OK');
+});
+
+A) API called (up to 2 times, then 429 error)B) API called (unlimited)C) TypeErrorD) No output
+Answer: A) API called (up to 2 times, then 429 error)Explanation: The rate limiter allows 2 requests per minute. After 2 calls, it returns a 429 error. This tests production-level rate limiting for API protection.
+
+19. What is logged in this MongoDB connection?
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/test', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(() => console.log('Connected to MongoDB'));
+
+console.log('Connecting...');
+
+A) Connecting..., Connected to MongoDBB) Connected to MongoDB, Connecting...C) TypeErrorD) No output
+Answer: A) Connecting..., Connected to MongoDBExplanation: The console.log('Connecting...') runs first, then the async mongoose.connect logs 'Connected to MongoDB' on success. This tests MongoDB setup, relevant to your MERN backend work (April 7, 2025).
+
+20. What is the output of this Proxy pattern?
+class RealService {
+  request() {
+    return 'Real response';
+  }
+}
+
+class ProxyService {
+  constructor() {
+    this.realService = new RealService();
+  }
+  request() {
+    console.log('Proxy check');
+    return this.realService.request();
+  }
+}
+
+const proxy = new ProxyService();
+console.log(proxy.request());
+
+A) Proxy check, Real responseB) Real response, Proxy checkC) TypeErrorD) undefined
+Answer: A) Proxy check, Real responseExplanation: The Proxy pattern controls access to a real service. The proxy logs 'Proxy check' and returns 'Real response'. This tests a design pattern for access control.
+
+21. What is logged in this network latency simulation?
+function simulateNetworkCall(ms) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log(`Call completed in ${ms}ms`);
+      resolve('Done');
+    }, ms);
+  });
+}
+
+simulateNetworkCall(1000);
+console.log('Initiated');
+
+A) Initiated, Call completed in 1000msB) Call completed in 1000ms, InitiatedC) TypeErrorD) No output
+Answer: A) Initiated, Call completed in 1000msExplanation: The synchronous 'Initiated' logs first, then the async setTimeout logs 'Call completed in 1000ms' after 1 second. This tests async networking and latency, a key Node.js concept (April 15, 2025).
+
+22. What is the outcome of this AWS S3 upload?
+const AWS = require('aws-sdk');
+const s3 = new AWS.S3();
+
+const params = {
+  Bucket: 'my-bucket',
+  Key: 'test.txt',
+  Body: 'Hello',
+};
+
+s3.upload(params, (err, data) => {
+  if (err) {
+    console.log('Error:', err.message);
+    return;
+  }
+  console.log('Uploaded:', data.Location);
+});
+
+A) Uploaded:  (on success)B) Error: AccessDeniedC) TypeErrorD) No output
+Answer: A) Uploaded:  (on success)Explanation: If AWS credentials and bucket permissions are correct, the s3.upload logs the file’s S3 URL. Otherwise, it logs an error. This tests AWS deployment integration.
+
+23. What is logged in this connection pooling setup?
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  user: 'user',
+  database: 'test',
+  password: 'pass',
+  port: 5432,
+  host: 'localhost',
+});
+
+pool.query('SELECT NOW()', (err, res) => {
+  console.log(res ? res.rows[0] : 'Error');
+});
+
+A) { now:  } (on success)B) ErrorC) TypeErrorD) undefined
+Answer: A) { now:  } (on success)Explanation: The connection pool executes the query, logging the current timestamp if successful. This tests connection pooling, a production-level database pattern.
+
+24. What is the output of this Strategy pattern?
+class Strategy {
+  execute() {}
+}
+
+class ConcreteStrategyA extends Strategy {
+  execute() {
+    console.log('Strategy A');
+  }
+}
+
+class Context {
+  constructor(strategy) {
+    this.strategy = strategy;
+  }
+  executeStrategy() {
+    this.strategy.execute();
+  }
+}
+
+const context = new Context(new ConcreteStrategyA());
+context.executeStrategy();
+
+A) Strategy AB) TypeErrorC) undefinedD) No output
+Answer: A) Strategy AExplanation: The Strategy pattern allows dynamic behavior swapping. The context uses ConcreteStrategyA, logging 'Strategy A'. This tests a flexible design pattern for production systems.
+
+25. What is logged in this GitHub Actions deployment failure?
+name: Deploy
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install
+      - run: npm run build
+      - run: aws s3 sync ./build s3://my-bucket
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+A) Error (if secrets not set)B) Build successfulC) TypeErrorD) No output
+Answer: A) Error (if secrets not set)Explanation: If AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY secrets are not configured in GitHub, the aws s3 sync step fails, logging an error. This tests CI/CD deployment to AWS, a common production scenario.
