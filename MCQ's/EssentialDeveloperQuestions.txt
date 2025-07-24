@@ -1,4 +1,4 @@
-Essential Developer Interview Questions (2025)
+                                                             Essential Developer Interview Questions (2025)
 These 25 output-based questions test critical knowledge for developers in intermediate networking, deployments (CI/CD, AWS, Azure), and production-level design patterns. Each question includes a code snippet or scenario, four answer options, the correct answer, and an explanation to prepare you for technical interviews.
 
 1. What is the output of the following React code with a network fetch?

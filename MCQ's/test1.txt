@@ -284,6 +284,7 @@ Answer: A) Lambda invoked, { statusCode: 200, body: "{"message":"Success"}" }
 Explanation: The AWS Lambda handler logs 'Lambda invoked' and returns a response object. This tests serverless deployment, a modern cloud pattern in AWS.
 
 15. What is logged in this Azure Function?
+
 module.exports = async function (context, req) {
   context.log('Function triggered');
   return {
@@ -292,8 +293,12 @@ module.exports = async function (context, req) {
   };
 };
 
-A) Function triggered, { status: 200, body: { message: 'Hello Azure' } }B) TypeErrorC) undefinedD) No output
-Answer: A) Function triggered, { status: 200, body: { message: 'Hello Azure' } }Explanation: The Azure Function logs 'Function triggered' and returns a response. This tests serverless deployment in Azure, a key cloud skill.
+A) Function triggered, { status: 200, body: { message: 'Hello Azure' } }
+B) TypeError
+C) undefined
+D) No output
+Answer: A) Function triggered, { status: 200, body: { message: 'Hello Azure' } }
+Explanation: The Azure Function logs 'Function triggered' and returns a response. This tests serverless deployment in Azure, a key cloud skill.
 
 16. What is the output of this Observer pattern?
 class Subject {
@@ -319,8 +324,13 @@ const obs = new Observer();
 subject.addObserver(obs);
 subject.notify('Event');
 
-A) Update: EventB) TypeErrorC) undefinedD) No output
-Answer: A) Update: EventExplanation: The Observer pattern notifies subscribers of events. The notify method calls update on the observer, logging 'Update: Event'. This tests a design pattern for event-driven systems.
+A) Update: Event
+B) TypeError
+C) undefined
+D) No output
+
+Answer: A) Update: Event
+Explanation: The Observer pattern notifies subscribers of events. The notify method calls update on the observer, logging 'Update: Event'. This tests a design pattern for event-driven systems.
 
 17. What is logged in this CI/CD pipeline script (GitHub Actions)?
 name: Deploy
@@ -334,10 +344,15 @@ jobs:
       - run: npm install
       - run: npm run build
 
-A) Building app (on push)B) TypeErrorC) undefinedD) No output
-Answer: A) Building app (on push)Explanation: The GitHub Actions workflow runs on push, executing steps including echo "Building app", which logs to the console. This tests CI/CD pipelines, as used in your Vercel deployments (March 8, 2025).
+A) Building app (on push)
+B) TypeError
+C) undefined
+D) No output
+Answer: A) Building app (on push)
+Explanation: The GitHub Actions workflow runs on push, executing steps including echo "Building app", which logs to the console. This tests CI/CD pipelines, as used in your Vercel deployments.
 
 18. What is the outcome of this rate limiter middleware?
+
 const rateLimit = require('express-rate-limit');
 const express = require('express');
 const app = express();
@@ -348,10 +363,15 @@ app.get('/api', (req, res) => {
   res.send('OK');
 });
 
-A) API called (up to 2 times, then 429 error)B) API called (unlimited)C) TypeErrorD) No output
-Answer: A) API called (up to 2 times, then 429 error)Explanation: The rate limiter allows 2 requests per minute. After 2 calls, it returns a 429 error. This tests production-level rate limiting for API protection.
+A) API called (up to 2 times, then 429 error)
+B) API called (unlimited)
+C) TypeError
+D) No output
+Answer: A) API called (up to 2 times, then 429 error)
+Explanation: The rate limiter allows 2 requests per minute. After 2 calls, it returns a 429 error. This tests production-level rate limiting for API protection.
 
 19. What is logged in this MongoDB connection?
+
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/test', {
@@ -361,8 +381,12 @@ mongoose.connect('mongodb://localhost/test', {
 
 console.log('Connecting...');
 
-A) Connecting..., Connected to MongoDBB) Connected to MongoDB, Connecting...C) TypeErrorD) No output
-Answer: A) Connecting..., Connected to MongoDBExplanation: The console.log('Connecting...') runs first, then the async mongoose.connect logs 'Connected to MongoDB' on success. This tests MongoDB setup, relevant to your MERN backend work (April 7, 2025).
+A) Connecting..., Connected to MongoDB
+B) Connected to MongoDB, Connecting...
+C) TypeError
+D) No output
+Answer: A) Connecting..., Connected to MongoDB
+Explanation: The console.log('Connecting...') runs first, then the async mongoose.connect logs 'Connected to MongoDB' on success. This tests MongoDB setup, relevant to your MERN backend work.
 
 20. What is the output of this Proxy pattern?
 class RealService {
@@ -384,10 +408,15 @@ class ProxyService {
 const proxy = new ProxyService();
 console.log(proxy.request());
 
-A) Proxy check, Real responseB) Real response, Proxy checkC) TypeErrorD) undefined
-Answer: A) Proxy check, Real responseExplanation: The Proxy pattern controls access to a real service. The proxy logs 'Proxy check' and returns 'Real response'. This tests a design pattern for access control.
+A) Proxy check, Real response
+B) Real response, Proxy check
+C) TypeError
+D) undefined
+Answer: A) Proxy check, Real response
+Explanation: The Proxy pattern controls access to a real service. The proxy logs 'Proxy check' and returns 'Real response'. This tests a design pattern for access control.
 
 21. What is logged in this network latency simulation?
+
 function simulateNetworkCall(ms) {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -400,10 +429,15 @@ function simulateNetworkCall(ms) {
 simulateNetworkCall(1000);
 console.log('Initiated');
 
-A) Initiated, Call completed in 1000msB) Call completed in 1000ms, InitiatedC) TypeErrorD) No output
-Answer: A) Initiated, Call completed in 1000msExplanation: The synchronous 'Initiated' logs first, then the async setTimeout logs 'Call completed in 1000ms' after 1 second. This tests async networking and latency, a key Node.js concept (April 15, 2025).
+A) Initiated, Call completed in 1000ms
+B) Call completed in 1000ms, Initiated
+C) TypeError
+D) No output
+Answer: A) Initiated, Call completed in 1000ms
+Explanation: The synchronous 'Initiated' logs first, then the async setTimeout logs 'Call completed in 1000ms' after 1 second. This tests async networking and latency, a key Node.js concept.
 
 22. What is the outcome of this AWS S3 upload?
+
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
 
@@ -421,10 +455,15 @@ s3.upload(params, (err, data) => {
   console.log('Uploaded:', data.Location);
 });
 
-A) Uploaded:  (on success)B) Error: AccessDeniedC) TypeErrorD) No output
-Answer: A) Uploaded:  (on success)Explanation: If AWS credentials and bucket permissions are correct, the s3.upload logs the file’s S3 URL. Otherwise, it logs an error. This tests AWS deployment integration.
+A) Uploaded:  (on success)
+B) Error: AccessDenied
+C) TypeError
+D) No output
+Answer: A) Uploaded:  (on success)
+Explanation: If AWS credentials and bucket permissions are correct, the s3.upload logs the file’s S3 URL. Otherwise, it logs an error. This tests AWS deployment integration.
 
 23. What is logged in this connection pooling setup?
+
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -439,10 +478,15 @@ pool.query('SELECT NOW()', (err, res) => {
   console.log(res ? res.rows[0] : 'Error');
 });
 
-A) { now:  } (on success)B) ErrorC) TypeErrorD) undefined
-Answer: A) { now:  } (on success)Explanation: The connection pool executes the query, logging the current timestamp if successful. This tests connection pooling, a production-level database pattern.
+A) { now:  } (on success)
+B) Error
+C) TypeError
+D) undefined
+Answer: A) { now:  } (on success)
+Explanation: The connection pool executes the query, logging the current timestamp if successful. This tests connection pooling, a production-level database pattern.
 
 24. What is the output of this Strategy pattern?
+
 class Strategy {
   execute() {}
 }
@@ -465,10 +509,15 @@ class Context {
 const context = new Context(new ConcreteStrategyA());
 context.executeStrategy();
 
-A) Strategy AB) TypeErrorC) undefinedD) No output
-Answer: A) Strategy AExplanation: The Strategy pattern allows dynamic behavior swapping. The context uses ConcreteStrategyA, logging 'Strategy A'. This tests a flexible design pattern for production systems.
+A) Strategy A
+B) TypeError
+C) undefined
+D) No output
+Answer: A) Strategy A
+Explanation: The Strategy pattern allows dynamic behavior swapping. The context uses ConcreteStrategyA, logging 'Strategy A'. This tests a flexible design pattern for production systems.
 
 25. What is logged in this GitHub Actions deployment failure?
+
 name: Deploy
 on: [push]
 jobs:
@@ -483,5 +532,10 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-A) Error (if secrets not set)B) Build successfulC) TypeErrorD) No output
-Answer: A) Error (if secrets not set)Explanation: If AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY secrets are not configured in GitHub, the aws s3 sync step fails, logging an error. This tests CI/CD deployment to AWS, a common production scenario.
+A) Error (if secrets not set)
+B) Build successful
+C) TypeError
+D) No output
+
+Answer: A) Error (if secrets not set)
+Explanation: If AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY secrets are not configured in GitHub, the aws s3 sync step fails, logging an error. This tests CI/CD deployment to AWS, a common production scenario.
