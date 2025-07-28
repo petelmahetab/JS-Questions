@@ -1,0 +1,595 @@
+                                                50 Complex MCQ Questions for Web Development, Networking, OS, Databases, and Deployments (2025)
+
+These 50 output-based questions test advanced knowledge in MERN stack (React, Node.js, Express, MongoDB), intermediate networking, operating systems, databases, and deployments (AWS, Azure). Each question includes a code snippet or scenario, four answer options, the correct answer, and an explanation to prepare you for technical interviews.
+
+ MERN Stack (Questions 1–10)
+1. What is logged in this React stale closure issue?
+
+import React, { useState, useEffect } from 'react';
+
+function App() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => console.log(count), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return <button onClick={() => setCount(count + 1)}>{count}</button>;
+}
+
+A) 0 (every second)
+B) 0, 1, 2, ... (every second)
+C) TypeError
+D) No output
+Answer: A) 0 (every second)
+Explanation: The useEffect captures the initial count (0) in a closure, logging 0 every second despite updates. Adding count to the dependency array fixes this. This tests tricky React hook closures.
+
+2. What is the output of this Express middleware order?
+const express = require('express');
+const app = express();
+
+app.use((req, res, next) => {
+  console.log('Middleware 1');
+  next();
+});
+
+app.get('/api', (req, res, next) => {
+  console.log('Route handler');
+  next();
+});
+
+app.use((req, res) => {
+  console.log('Middleware 2');
+  res.send('Done');
+});
+
+A) Middleware 1, Route handler, Middleware 2 (on request)
+B) Route handler, Middleware 1, Middleware 2
+C) TypeError
+D) No output
+Answer: A) Middleware 1, Route handler, Middleware 2 (on request)
+Explanation: Express middleware executes in order: global middleware, route handler, then post-route middleware. This tests middleware ordering, a common MERN pitfall (July 18, 2025).
+
+3. What is logged in this React context with stale state?
+import React, { createContext, useContext, useState } from 'react';
+
+const MyContext = createContext();
+
+function Child() {
+  const value = useContext(MyContext);
+  console.log(value);
+  return <div>{value}</div>;
+}
+
+function App() {
+  const [value, setValue] = useState('Initial');
+  setTimeout(() => setValue('Updated'), 1000);
+  return <MyContext.Provider value={value}><Child /></MyContext.Provider>;
+}
+
+A) Initial, Updated
+B) Initial (only)
+C) TypeError
+D) No output
+Answer: A) Initial, Updated
+Explanation: The initial render logs 'Initial'. After 1 second, setValue triggers a re-render, logging 'Updated'. This tests context updates in React.
+
+4. What is the outcome of this MongoDB query with error?
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const userSchema = new Schema({ name: String });
+const User = mongoose.model('User', userSchema);
+
+async function findUser() {
+  try {
+    const user = await User.findOne({ name: 'John' });
+    console.log(user.name);
+  } catch (err) {
+    console.log('Error:', err.message);
+  }
+}
+findUser();
+
+A) Error: No connection to MongoDB
+B) John
+C) TypeError
+D) null
+Answer: A) Error: No connection to MongoDBExplanation: Without mongoose.connect, the query fails, logging an error. This tests MongoDB connection issues, relevant to your Redis/MongoDB queries.
+
+5. What is logged in this React useEffect cleanup?
+
+import React, { useEffect, useState } from 'react';
+
+function App() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    console.log('Effect');
+    return () => console.log('Cleanup');
+  }, [count]);
+  return <button onClick={() => setCount(count + 1)}>{count}</button>;
+}
+
+A) Effect, Cleanup, Effect (every click)
+B) Effect (only)
+C) TypeError
+D) No output
+Answer: A) Effect, Cleanup, Effect (every click)
+Explanation: Each count update triggers UseEffect: cleanup runs first (logging 'Cleanup'), then the new effect (logging 'Effect'). This tests tricky useEffect cleanup behavior.
+
+6. What is the output of this Express rate limiter?
+
+const express = require('express');
+const rateLimit = require('express-rate-limit');
+const app = express();
+
+app.use(rateLimit({ windowMs: 60000, max: 2 }));
+app.get('/api', (req, res) => {
+  console.log('API called');
+  res.send('OK');
+});
+
+A) API called (up to 2 times, then 429 error)
+B) API called (unlimited)
+C) TypeError
+D) No output
+Answer: A) API called (up to 2 times, then 429 error)
+Explanation: The rate limiter allows 2 requests per minute, logging 'API called'. The third request returns a 429 error. This tests production API protection.
+
+7. What is logged in this Node.js async middleware?
+
+const express = require('express');
+const app = express();
+
+app.use(async (req, res, next) => {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  console.log('Middleware');
+  next();
+});
+
+app.get('/api', (req, res) => {
+  console.log('Route');
+  res.send('Done');
+});
+
+A) Middleware, Route (on request)
+B) Route, Middleware
+C) TypeError
+D) No output
+Answer: A) Middleware, Route (on request)
+Explanation: The async middleware delays 1 second, logs 'Middleware', then calls next(), triggering 'Route'. This tests async middleware in Express.
+
+8. What is the outcome of this React Suspense with lazy loading?
+
+import React, { Suspense, useState } from 'react';
+
+const LazyComponent = React.lazy(() => import('./LazyComponent'));
+
+function App() {
+  const [show, setShow] = useState(false);
+  console.log('Render');
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      {show && <LazyComponent />}
+      <button onClick={() => setShow(true)}>Show</button>
+    </Suspense>
+  );
+}
+
+A) Render (once)
+B) Render, Loading...
+C) TypeError
+D) No output
+Answer: A) Render (once)
+Explanation: The initial render logs 'Render'. Clicking shows the fallback ('Loading...') in the DOM, not the console. This tests React 18’s Suspense and lazy loading.
+
+9. What is logged in this MongoDB transaction?
+
+const mongoose = require('mongoose');
+
+async function runTransaction() {
+  const session = await mongoose.startSession();
+  try {
+    await session.withTransaction(async () => {
+      throw new Error('Transaction failed');
+    });
+    console.log('Success');
+  } catch (err) {
+    console.log('Error:', err.message);
+  } finally {
+    session.endSession();
+  }
+}
+runTransaction();
+
+A) Error: Transaction failed
+B) Success
+C) TypeError
+D) No output
+Answer: A) Error: Transaction failed
+Explanation: The transaction throws an error, rolling back changes and logging 'Error: Transaction failed'. This tests MongoDB transactions, a production feature.
+
+10. What is the output of this React useReducer?
+
+import React, { useReducer } from 'react';
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return state + 1;
+    default:
+      throw new Error('Unknown action');
+  }
+}
+
+function App() {
+  const [count, dispatch] = useReducer(reducer, 0);
+  return <button onClick={() => dispatch({ type: 'invalid' })}>{count}</button>;
+}
+
+A) Error: Unknown action
+B) 0
+C) TypeError
+D) No output
+Answer: A) Error: Unknown action
+Explanation: The invalid action type throws an error, crashing the component. This tests useReducer error handling, a tricky React concept....
+
+
+Networking (Questions 11–20)
+
+11. What is logged in this WebSocket reconnect attempt?
+
+const WebSocket = require('ws');
+
+function connect() {
+  const ws = new WebSocket('ws://localhost:9999');
+  ws.onopen = () => console.log('Connected');
+  ws.onclose = () => console.log('Disconnected');
+}
+connect();
+setTimeout(connect, 1000);
+
+A) Disconnected, Disconnected (if server unavailable)
+B) Connected (twice)
+C) TypeError
+D) No output
+Answer: A) Disconnected, Disconnected (if server unavailable)
+Explanation: If no server listens on port 9999, both connection attempts fail, logging 'Disconnected' twice. This tests WebSocket reconnect logic, relevant to your Socket.IO work (March 21, 2025).
+
+12. What is the outcome of this DNS lookup failure?
+const dns = require('dns').promises;
+
+async function lookup() {
+  try {
+    const result = await dns.lookup('invalid.example.com');
+    console.log(result.address);
+  } catch (err) {
+    console.log('Error:', err.code);
+  }
+}
+lookup();
+
+A) Error: ENOTFOUNDB) IP addressC) TypeErrorD) No output
+Answer: A) Error: ENOTFOUNDExplanation: The invalid domain causes a DNS lookup failure, logging 'Error: ENOTFOUND'. This tests DNS networking errors.
+
+13. What is logged in this TCP server with client data?
+const net = require('net');
+
+const server = net.createServer((socket) => {
+  console.log('Client connected');
+  socket.on('data', (data) => console.log('Data:', data.toString()));
+});
+server.listen(8080, () => console.log('Server started'));
+
+A) Server started, Client connected, Data:  (on connection)B) Client connected, Server startedC) TypeErrorD) No output
+Answer: A) Server started, Client connected, Data:  (on connection)Explanation: The server logs 'Server started', then 'Client connected' and client data on connection. This tests TCP networking, a core concept.
+
+14. What is the outcome of this CORS misconfiguration?
+const express = require('express');
+const app = express();
+
+app.get('/api/data', (req, res) => {
+  console.log('Request received');
+  res.json({ value: 'Test' });
+});
+app.listen(3000);
+
+A) Request received (if CORS allowed)B) CORS error in browserC) TypeErrorD) No output
+Answer: B) CORS error in browserExplanation: Without CORS middleware, cross-origin requests fail in the browser, though the server logs 'Request received'. This tests CORS pitfalls (March 8, 2025).
+
+15. What is logged in this HTTP/2 server?
+const http2 = require('http2');
+
+const server = http2.createServer();
+server.on('stream', (stream) => {
+  console.log('Stream received');
+  stream.respond({ ':status': 200 });
+  stream.end('OK');
+});
+server.listen(8443, () => console.log('HTTP/2 server started'));
+
+A) HTTP/2 server started, Stream received (on request)B) Stream received, HTTP/2 server startedC) TypeErrorD) No output
+Answer: A) HTTP/2 server started, Stream received (on request)Explanation: The HTTP/2 server logs 'HTTP/2 server started' and 'Stream received' per request. This tests modern HTTP/2 networking.
+
+16. What is the outcome of this load balancer with failure?
+function loadBalancer(servers, requestId) {
+  if (!servers.length) {
+    console.log('No servers available');
+    return null;
+  }
+  const index = requestId % servers.length;
+  console.log(`Routing to ${servers[index]}`);
+  return servers[index];
+}
+loadBalancer([], 1);
+
+A) No servers available, nullB) TypeErrorC) undefinedD) Routing to undefined
+Answer: A) No servers available, nullExplanation: An empty server list logs 'No servers available' and returns null. This tests load balancing edge cases.
+
+17. What is logged in this WebSocket client with invalid URL?
+const WebSocket = require('ws');
+
+const ws = new WebSocket('ws://invalid-host:8080');
+ws.onopen = () => console.log('Connected');
+ws.onerror = (err) => console.log('Error:', err.message);
+
+A) Error: getaddrinfo ENOTFOUND invalid-hostB) ConnectedC) TypeErrorD) No output
+Answer: A) Error: getaddrinfo ENOTFOUND invalid-hostExplanation: The invalid host causes a DNS error, logging 'Error: getaddrinfo ENOTFOUND invalid-host'. This tests WebSocket networking errors.
+
+18. What is the output of this TCP client timeout?
+const net = require('net');
+
+const client = net.createConnection({ port: 9999, timeout: 1000 });
+client.on('connect', () => console.log('Connected'));
+client.on('timeout', () => console.log('Timeout'));
+client.on('error', (err) => console.log('Error:', err.message));
+
+A) Timeout, Error: connect ECONNREFUSEDB) ConnectedC) TypeErrorD) No output
+Answer: A) Timeout, Error: connect ECONNREFUSEDExplanation: If no server listens on port 9999, the client times out after 1 second, logging 'Timeout', followed by 'Error: connect ECONNREFUSED'. This tests TCP timeout handling.
+
+19. What is logged in this reverse proxy setup?
+const http = require('http');
+const httpProxy = require('http-proxy');
+
+const proxy = httpProxy.createProxyServer();
+http.createServer((req, res) => {
+  console.log('Proxy request');
+  proxy.web(req, res, { target: 'http://localhost:3000' });
+}).listen(8080, () => console.log('Proxy started'));
+
+A) Proxy started, Proxy request (on request)B) Proxy request, Proxy startedC) TypeErrorD) No output
+Answer: A) Proxy started, Proxy request (on request)Explanation: The proxy server logs 'Proxy started' and 'Proxy request' per request. This tests reverse proxy networking for load balancing.
+
+20. What is the outcome of this rate limiter with burst?
+const express = require('express');
+const rateLimit = require('express-rate-limit');
+const app = express();
+
+app.use(rateLimit({ windowMs: 60000, max: 3, standardHeaders: true }));
+app.get('/api', (req, res) => {
+  console.log('API called');
+  res.send('OK');
+});
+
+A) API called (3 times, then 429 error)B) API called (unlimited)C) TypeErrorD) No output
+Answer: A) API called (3 times, then 429 error)Explanation: The rate limiter allows 3 requests per minute, logging 'API called' before returning a 429 error. This tests burst rate limiting.
+
+Operating Systems (Questions 21–30)
+21. What is logged in this Node.js process fork?
+const { fork } = require('child_process');
+
+const child = fork('child.js');
+child.on('message', (msg) => console.log('Parent:', msg));
+child.send('Start');
+
+// child.js
+process.on('message', (msg) => {
+  console.log('Child:', msg);
+  process.send('Done');
+});
+
+A) Child: Start, Parent: DoneB) Parent: Done, Child: StartC) TypeErrorD) No output
+Answer: A) Child: Start, Parent: DoneExplanation: The child process logs 'Child: Start' on receiving the message, then sends 'Done', logged as 'Parent: Done'. This tests OS process forking.
+
+22. What is the outcome of this thread pool exhaustion?
+const { Worker, isMainThread } = require('worker_threads');
+
+if (isMainThread) {
+  for (let i = 0; i < 10; i++) {
+    new Worker(__filename);
+  }
+  console.log('Main thread');
+} else {
+  console.log('Worker thread');
+}
+
+A) Main thread, Worker thread (up to thread pool limit)B) Worker thread (10 times)C) TypeErrorD) No output
+Answer: A) Main thread, Worker thread (up to thread pool limit)Explanation: The main thread spawns workers, logging 'Main thread'. Workers log 'Worker thread', but the thread pool (typically 4–8 threads) limits execution. This tests OS thread management.
+
+23. What is logged in this file descriptor limit?
+const fs = require('fs');
+
+for (let i = 0; i < 1000; i++) {
+  fs.open('test.txt', 'r', (err, fd) => {
+    if (err) {
+      console.log('Error:', err.message);
+      return;
+    }
+    console.log('File opened');
+  });
+}
+
+A) Error: EMFILE: too many open filesB) File opened (1000 times)C) TypeErrorD) No output
+Answer: A) Error: EMFILE: too many open filesExplanation: Exceeding the OS file descriptor limit causes 'Error: EMFILE: too many open files'. This tests OS resource limits.
+
+24. What is the outcome of this process signal handling?
+process.on('SIGTERM', () => {
+  console.log('Terminating');
+  process.exit(0);
+});
+
+console.log('Running');
+setTimeout(() => process.kill(process.pid, 'SIGTERM'), 1000);
+
+A) Running, TerminatingB) Terminating, RunningC) TypeErrorD) No output
+Answer: A) Running, TerminatingExplanation: The process logs 'Running', then after 1 second, the SIGTERM signal triggers 'Terminating' and exits. This tests OS signal handling.
+
+25. What is logged in this memory leak scenario?
+const cache = [];
+
+setInterval(() => {
+  cache.push(new Array(1e6).fill(0));
+  console.log('Added to cache');
+}, 1000);
+
+A) Added to cache (every second, until crash)B) TypeErrorC) No outputD) Added to cache (once)
+Answer: A) Added to cache (every second, until crash)Explanation: The interval adds large arrays to cache, logging 'Added to cache' until memory exhaustion crashes the process. This tests OS memory management.
+
+26. What is the outcome of this file system race condition?
+const fs = require('fs');
+
+fs.writeFile('test.txt', 'Data', (err) => {
+  if (err) console.log('Error:', err.message);
+  console.log('Written');
+});
+fs.writeFile('test.txt', 'New Data', (err) => {
+  if (err) console.log('Error:', err.message);
+  console.log('Written');
+});
+
+A) Written (twice, non-deterministic order)B) Error: EBUSYC) TypeErrorD) No output
+Answer: A) Written (twice, non-deterministic order)Explanation: Concurrent writeFile calls may overwrite data, both logging 'Written'. The order is unpredictable due to async I/O. This tests OS file system race conditions.
+
+27. What is logged in this process priority?
+const { exec } = require('child_process');
+
+exec('nice -n 10 node script.js', (err, stdout) => {
+  if (err) console.log('Error:', err.message);
+  console.log('Output:', stdout);
+});
+
+// script.js
+console.log('Script running');
+
+A) Script running, Output: Script runningB) Error: command not foundC) TypeErrorD) No output
+Answer: A) Script running, Output: Script runningExplanation: The nice command sets priority, running script.js, which logs 'Script running'. The parent logs 'Output: Script running'. This tests OS process scheduling.
+
+28. What is the outcome of this thread deadlock simulation?
+const { Worker, isMainThread } = require('worker_threads');
+
+if (isMainThread) {
+  const worker = new Worker(__filename);
+  worker.postMessage('Start');
+  console.log('Main waiting');
+} else {
+  process.on('message', () => {
+    console.log('Worker waiting');
+    // Infinite loop simulates deadlock
+    while (true) {}
+  });
+}
+
+A) Main waiting, Worker waiting (then hangs)B) Worker waiting, Main waitingC) TypeErrorD) No output
+Answer: A) Main waiting, Worker waiting (then hangs)Explanation: The main thread logs 'Main waiting', the worker logs 'Worker waiting', then deadlocks in an infinite loop. This tests OS thread deadlocks.
+
+29. What is logged in this file system lock?
+const fs = require('fs');
+
+fs.open('test.txt', 'wx', (err, fd) => {
+  if (err) {
+    console.log('Error:', err.code);
+    return;
+  }
+  console.log('File locked');
+});
+fs.open('test.txt', 'wx', (err) => {
+  console.log('Error:', err.code);
+});
+
+A) Error: EEXISTB) File locked (twice)C) TypeErrorD) No output
+Answer: A) Error: EEXISTExplanation: The 'wx' flag prevents opening an existing file, so the second open logs 'Error: EEXIST'. This tests OS file locking.
+
+30. What is the outcome of this process resource limit?
+const { spawn } = require('child_process');
+
+const child = spawn('node', ['-e', 'while(true) { console.log("Running"); }']);
+child.stdout.on('data', (data) => console.log('Output:', data.toString()));
+setTimeout(() => child.kill('SIGKILL'), 1000);
+
+A) Output: Running (multiple), then terminatesB) TypeErrorC) No outputD) Running (once)
+Answer: A) Output: Running (multiple), then terminatesExplanation: The child process logs 'Running' until killed after 1 second. The parent logs 'Output: Running'. This tests OS process termination.
+
+Databases (Questions 31–40)
+31. What is logged in this MongoDB index failure?
+const mongoose = require('mongoose');
+
+const userSchema = new Schema({ name: String });
+userSchema.index({ name: 1 }, { unique: true });
+const User = mongoose.model('User', userSchema);
+
+async function insert() {
+  await User.create({ name: 'John' });
+  await User.create({ name: 'John' });
+  console.log('Inserted');
+}
+insert().catch((err) => console.log('Error:', err.message));
+
+A) Error: E11000 duplicate key errorB) InsertedC) TypeErrorD) No output
+Answer: A) Error: E11000 duplicate key errorExplanation: The unique index on name prevents duplicate entries, logging 'Error: E11000 duplicate key error'. This tests MongoDB indexing.
+
+32. What is the outcome of this PostgreSQL query?
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  user: 'user',
+  database: 'test',
+  password: 'pass',
+  port: 5432,
+  host: 'localhost',
+});
+
+pool.query('SELECT * FROM nonexistent_table', (err, res) => {
+  console.log(err ? 'Error: ' + err.message : res.rows);
+});
+
+A) Error: relation "nonexistent_table" does not existB) [] (empty rows)C) TypeErrorD) No output
+Answer: A) Error: relation "nonexistent_table" does not existExplanation: Querying a nonexistent table causes an error. This tests PostgreSQL query handling.
+
+33. What is logged in this MongoDB aggregation?
+const mongoose = require('mongoose');
+
+const userSchema = new Schema({ age: Number });
+const User = mongoose.model('User', userSchema);
+
+async function aggregate() {
+  await User.insertMany([{ age: 20 }, { age: 30 }]);
+  const result = await User.aggregate([{ $group: { _id: null, avgAge: { $avg: '$age' } } }]);
+  console.log(result[0].avgAge);
+}
+aggregate();
+
+A) 25B) TypeErrorC) undefinedD) No output
+Answer: A) 25Explanation: The aggregation computes the average age (25). This tests MongoDB aggregation pipelines.
+
+34. What is the outcome of this Redis cache miss?
+const redis = require('redis');
+const client = redis.createClient();
+
+client.on('error', (err) => console.log('Error:', err.message));
+
+async function getData() {
+  const value = await client.get('key');
+  console.log(value);
+}
+getData();
+
+A) nullB) Error: Connection refusedC) TypeErrorD) undefined
+Answer: A) nullExplanation: If the key doesn’t exist, client.get returns null. If Redis isn’t running, an error may occur. This tests Redis caching, relevant to your Redis queries (July 9, 2025).
+
+35. What is logged in this MongoDB connection timeout?
+const mongoose = require('mongoose');
+
+async function connect() {
+  try {
+    await mongoose.connect('mongodb://invalid-host/test', { serverSelectionTimeoutMS: 1000 });
+    console.log('Connected');
+  }
