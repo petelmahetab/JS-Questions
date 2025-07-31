@@ -252,10 +252,11 @@ A) Disconnected, Disconnected (if server unavailable)
 B) Connected (twice)
 C) TypeError
 D) No output
-Answer: A) Disconnected, Disconnected (if server unavailable)
+Answer: A) Disconnected, Disconnected (if server unavailable). Before define Connection file WebSocket like Port,On event.
 Explanation: If no server listens on port 9999, both connection attempts fail, logging 'Disconnected' twice. This tests WebSocket reconnect logic, relevant to your Socket.IO work (March 21, 2025).
 
 12. What is the outcome of this DNS lookup failure?
+
 const dns = require('dns').promises;
 
 async function lookup() {
@@ -268,10 +269,15 @@ async function lookup() {
 }
 lookup();
 
-A) Error: ENOTFOUNDB) IP addressC) TypeErrorD) No output
-Answer: A) Error: ENOTFOUNDExplanation: The invalid domain causes a DNS lookup failure, logging 'Error: ENOTFOUND'. This tests DNS networking errors.
+A) Error: ENOTFOUND
+B) IP address
+C) TypeError
+D) No output
+Answer: A) Error: ENOTFOUND
+Explanation: The invalid domain causes a DNS lookup failure, logging 'Error: ENOTFOUND'. This tests DNS networking errors.
 
 13. What is logged in this TCP server with client data?
+
 const net = require('net');
 
 const server = net.createServer((socket) => {
@@ -280,10 +286,15 @@ const server = net.createServer((socket) => {
 });
 server.listen(8080, () => console.log('Server started'));
 
-A) Server started, Client connected, Data:  (on connection)B) Client connected, Server startedC) TypeErrorD) No output
-Answer: A) Server started, Client connected, Data:  (on connection)Explanation: The server logs 'Server started', then 'Client connected' and client data on connection. This tests TCP networking, a core concept.
+A) Server started, Client connected, Data:  (on connection)
+B) Client connected, Server started
+C) TypeError
+D) No output
+Answer: A) Server started, Client connected, Data:  (on connection).
+Explanation: The server logs 'Server started', then 'Client connected' and client data on connection. This tests TCP networking, a core concept.
 
 14. What is the outcome of this CORS misconfiguration?
+
 const express = require('express');
 const app = express();
 
@@ -293,10 +304,15 @@ app.get('/api/data', (req, res) => {
 });
 app.listen(3000);
 
-A) Request received (if CORS allowed)B) CORS error in browserC) TypeErrorD) No output
-Answer: B) CORS error in browserExplanation: Without CORS middleware, cross-origin requests fail in the browser, though the server logs 'Request received'. This tests CORS pitfalls (March 8, 2025).
+A) Request received (if CORS allowed)
+B) CORS error in browser
+C) TypeError
+D) No output
+Answer: B) CORS error in browser
+Explanation: Without CORS middleware, cross-origin requests fail in the browser, though the server logs 'Request received'.
 
 15. What is logged in this HTTP/2 server?
+
 const http2 = require('http2');
 
 const server = http2.createServer();
@@ -307,10 +323,15 @@ server.on('stream', (stream) => {
 });
 server.listen(8443, () => console.log('HTTP/2 server started'));
 
-A) HTTP/2 server started, Stream received (on request)B) Stream received, HTTP/2 server startedC) TypeErrorD) No output
-Answer: A) HTTP/2 server started, Stream received (on request)Explanation: The HTTP/2 server logs 'HTTP/2 server started' and 'Stream received' per request. This tests modern HTTP/2 networking.
+A) HTTP/2 server started, Stream received (on request)
+B) Stream received, HTTP/2 server started
+C) TypeError
+D) No output
+Answer: A) HTTP/2 server started, Stream received (on request)
+Explanation: The HTTP/2 server logs 'HTTP/2 server started' and 'Stream received' per request. This tests modern HTTP/2 networking.
 
 16. What is the outcome of this load balancer with failure?
+
 function loadBalancer(servers, requestId) {
   if (!servers.length) {
     console.log('No servers available');
@@ -322,20 +343,30 @@ function loadBalancer(servers, requestId) {
 }
 loadBalancer([], 1);
 
-A) No servers available, nullB) TypeErrorC) undefinedD) Routing to undefined
-Answer: A) No servers available, nullExplanation: An empty server list logs 'No servers available' and returns null. This tests load balancing edge cases.
+A) No servers available, null
+B) TypeError
+C) undefined
+D) Routing to undefined
+Answer: A) No servers available, null
+Explanation: An empty server list logs 'No servers available' and returns null. This tests load balancing edge cases.
 
 17. What is logged in this WebSocket client with invalid URL?
+
 const WebSocket = require('ws');
 
 const ws = new WebSocket('ws://invalid-host:8080');
 ws.onopen = () => console.log('Connected');
 ws.onerror = (err) => console.log('Error:', err.message);
 
-A) Error: getaddrinfo ENOTFOUND invalid-hostB) ConnectedC) TypeErrorD) No output
-Answer: A) Error: getaddrinfo ENOTFOUND invalid-hostExplanation: The invalid host causes a DNS error, logging 'Error: getaddrinfo ENOTFOUND invalid-host'. This tests WebSocket networking errors.
+A) Error: getaddrinfo ENOTFOUND invalid-host
+B) Connected
+C) TypeError
+D) No output
+Answer: A) Error: getaddrinfo ENOTFOUND invalid-host
+Explanation: The invalid host causes a DNS error, logging 'Error: getaddrinfo ENOTFOUND invalid-host'. This tests WebSocket networking errors.
 
 18. What is the output of this TCP client timeout?
+
 const net = require('net');
 
 const client = net.createConnection({ port: 9999, timeout: 1000 });
@@ -343,10 +374,15 @@ client.on('connect', () => console.log('Connected'));
 client.on('timeout', () => console.log('Timeout'));
 client.on('error', (err) => console.log('Error:', err.message));
 
-A) Timeout, Error: connect ECONNREFUSEDB) ConnectedC) TypeErrorD) No output
-Answer: A) Timeout, Error: connect ECONNREFUSEDExplanation: If no server listens on port 9999, the client times out after 1 second, logging 'Timeout', followed by 'Error: connect ECONNREFUSED'. This tests TCP timeout handling.
+A) Timeout, Error: connect ECONNREFUSED
+B) Connected
+C) TypeError
+D) No output
+Answer: A) Timeout, Error: connect ECONNREFUSED
+Explanation: If no server listens on port 9999, the client times out after 1 second, logging 'Timeout', followed by 'Error: connect ECONNREFUSED'. This tests TCP timeout handling.
 
 19. What is logged in this reverse proxy setup?
+
 const http = require('http');
 const httpProxy = require('http-proxy');
 
@@ -356,10 +392,15 @@ http.createServer((req, res) => {
   proxy.web(req, res, { target: 'http://localhost:3000' });
 }).listen(8080, () => console.log('Proxy started'));
 
-A) Proxy started, Proxy request (on request)B) Proxy request, Proxy startedC) TypeErrorD) No output
-Answer: A) Proxy started, Proxy request (on request)Explanation: The proxy server logs 'Proxy started' and 'Proxy request' per request. This tests reverse proxy networking for load balancing.
+A) Proxy started, Proxy request (on request)
+B) Proxy request, Proxy started
+C) TypeError
+D) No output
+Answer: A) Proxy started, Proxy request (on request)
+Explanation: The proxy server logs 'Proxy started' and 'Proxy request' per request. This tests reverse proxy networking for load balancing.
 
 20. What is the outcome of this rate limiter with burst?
+
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const app = express();
@@ -370,14 +411,21 @@ app.get('/api', (req, res) => {
   res.send('OK');
 });
 
-A) API called (3 times, then 429 error)B) API called (unlimited)C) TypeErrorD) No output
-Answer: A) API called (3 times, then 429 error)Explanation: The rate limiter allows 3 requests per minute, logging 'API called' before returning a 429 error. This tests burst rate limiting.
+A) API called (3 times, then 429 error)
+B) API called (unlimited)
+C) TypeError
+D) No output
+Answer: A) API called (3 times, then 429 error)
+Explanation: The rate limiter allows 3 requests per minute, logging 'API called' before returning a 429 error. This tests burst rate limiting.
 
-Operating Systems (Questions 21–30)
+ Operating Systems (Questions 21–30)
+
 21. What is logged in this Node.js process fork?
+
 const { fork } = require('child_process');
 
 const child = fork('child.js');
+
 child.on('message', (msg) => console.log('Parent:', msg));
 child.send('Start');
 
