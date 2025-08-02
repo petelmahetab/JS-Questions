@@ -435,8 +435,12 @@ process.on('message', (msg) => {
   process.send('Done');
 });
 
-A) Child: Start, Parent: DoneB) Parent: Done, Child: StartC) TypeErrorD) No output
-Answer: A) Child: Start, Parent: DoneExplanation: The child process logs 'Child: Start' on receiving the message, then sends 'Done', logged as 'Parent: Done'. This tests OS process forking.
+A) Child: Start, Parent: Done
+B) Parent: Done, Child: Start
+C) TypeError
+D) No output
+Answer: A) Child: Start, Parent: Done
+giExplanation: The child process logs 'Child: Start' on receiving the message, then sends 'Done', logged as 'Parent: Done'. This tests OS process forking.
 
 22. What is the outcome of this thread pool exhaustion?
 const { Worker, isMainThread } = require('worker_threads');
