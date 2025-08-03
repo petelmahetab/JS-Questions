@@ -440,9 +440,10 @@ B) Parent: Done, Child: Start
 C) TypeError
 D) No output
 Answer: A) Child: Start, Parent: Done
-giExplanation: The child process logs 'Child: Start' on receiving the message, then sends 'Done', logged as 'Parent: Done'. This tests OS process forking.
+Explanation: The child process logs 'Child: Start' on receiving the message, then sends 'Done', logged as 'Parent: Done'. This tests OS process forking.
 
 22. What is the outcome of this thread pool exhaustion?
+
 const { Worker, isMainThread } = require('worker_threads');
 
 if (isMainThread) {
@@ -454,8 +455,12 @@ if (isMainThread) {
   console.log('Worker thread');
 }
 
-A) Main thread, Worker thread (up to thread pool limit)B) Worker thread (10 times)C) TypeErrorD) No output
-Answer: A) Main thread, Worker thread (up to thread pool limit)Explanation: The main thread spawns workers, logging 'Main thread'. Workers log 'Worker thread', but the thread pool (typically 4–8 threads) limits execution. This tests OS thread management.
+A) Main thread, Worker thread (Up to thread pool limit)
+B) Worker thread (10 times)
+C) TypeError
+D) No output
+Answer: A) Main thread, Worker thread (up to thread pool limit)
+Explanation: The main thread spawns workers, logging 'Main thread'. Workers log 'Worker thread', but the thread pool (typically 4–8 threads) limits execution. This tests OS thread management.
 
 23. What is logged in this file descriptor limit?
 const fs = require('fs');
