@@ -459,10 +459,11 @@ A) Main thread, Worker thread (Up to thread pool limit)
 B) Worker thread (10 times)
 C) TypeError
 D) No output
-Answer: A) Main thread, Worker thread (up to thread pool limit)
+Answer: A) Main thread, Worker thread (Up to thread pool limit)
 Explanation: The main thread spawns workers, logging 'Main thread'. Workers log 'Worker thread', but the thread pool (typically 4–8 threads) limits execution. This tests OS thread management.
 
 23. What is logged in this file descriptor limit?
+
 const fs = require('fs');
 
 for (let i = 0; i < 1000; i++) {
@@ -475,10 +476,15 @@ for (let i = 0; i < 1000; i++) {
   });
 }
 
-A) Error: EMFILE: too many open filesB) File opened (1000 times)C) TypeErrorD) No output
-Answer: A) Error: EMFILE: too many open filesExplanation: Exceeding the OS file descriptor limit causes 'Error: EMFILE: too many open files'. This tests OS resource limits.
+A) Error: EMFILE: too many open files
+B) File opened (1000 times)
+C) TypeError
+D) No output
+Answer: A) Error: EMFILE: too many open files
+Explanation: Exceeding the OS file descriptor limit causes 'Error: EMFILE: too many open files'. This tests OS resource limits.
 
 24. What is the outcome of this process signal handling?
+
 process.on('SIGTERM', () => {
   console.log('Terminating');
   process.exit(0);
@@ -487,10 +493,15 @@ process.on('SIGTERM', () => {
 console.log('Running');
 setTimeout(() => process.kill(process.pid, 'SIGTERM'), 1000);
 
-A) Running, TerminatingB) Terminating, RunningC) TypeErrorD) No output
-Answer: A) Running, TerminatingExplanation: The process logs 'Running', then after 1 second, the SIGTERM signal triggers 'Terminating' and exits. This tests OS signal handling.
+A) Running, Terminating
+B) Terminating, Running
+C) TypeError
+D) No output
+Answer: A) Running, Terminating
+Explanation: The process logs 'Running', then after 1 second, the SIGTERM signal triggers 'Terminating' and exits. This tests OS signal handling.
 
 25. What is logged in this memory leak scenario?
+
 const cache = [];
 
 setInterval(() => {
@@ -498,10 +509,15 @@ setInterval(() => {
   console.log('Added to cache');
 }, 1000);
 
-A) Added to cache (every second, until crash)B) TypeErrorC) No outputD) Added to cache (once)
-Answer: A) Added to cache (every second, until crash)Explanation: The interval adds large arrays to cache, logging 'Added to cache' until memory exhaustion crashes the process. This tests OS memory management.
+A) Added to cache (every second, until crash)
+B) TypeError
+C) No output
+D) Added to cache (once)
+Answer: A) Added to cache (every second, until crash)
+Explanation: The interval adds large arrays to cache, logging 'Added to cache' until memory exhaustion crashes the process. This tests OS memory management.
 
 26. What is the outcome of this file system race condition?
+
 const fs = require('fs');
 
 fs.writeFile('test.txt', 'Data', (err) => {
@@ -513,10 +529,15 @@ fs.writeFile('test.txt', 'New Data', (err) => {
   console.log('Written');
 });
 
-A) Written (twice, non-deterministic order)B) Error: EBUSYC) TypeErrorD) No output
-Answer: A) Written (twice, non-deterministic order)Explanation: Concurrent writeFile calls may overwrite data, both logging 'Written'. The order is unpredictable due to async I/O. This tests OS file system race conditions.
+A) Written (twice, non-deterministic order)
+B) Error: EBUSY
+C) TypeError
+D) No output
+Answer: A) Written (twice, non-deterministic order)
+Explanation: Concurrent writeFile calls may overwrite data, both logging 'Written'. The order is unpredictable due to async I/O. This tests OS file system race conditions.
 
 27. What is logged in this process priority?
+
 const { exec } = require('child_process');
 
 exec('nice -n 10 node script.js', (err, stdout) => {
@@ -527,8 +548,12 @@ exec('nice -n 10 node script.js', (err, stdout) => {
 // script.js
 console.log('Script running');
 
-A) Script running, Output: Script runningB) Error: command not foundC) TypeErrorD) No output
-Answer: A) Script running, Output: Script runningExplanation: The nice command sets priority, running script.js, which logs 'Script running'. The parent logs 'Output: Script running'. This tests OS process scheduling.
+A) Script running, Output: Script running
+B) Error: command not found
+C) TypeError
+D) No output
+Answer: A) Script running, Output: Script running
+Explanation: The nice command sets priority, running script.js, which logs 'Script running'. The parent logs 'Output: Script running'. This tests OS process scheduling.
 
 28. What is the outcome of this thread deadlock simulation?
 const { Worker, isMainThread } = require('worker_threads');
