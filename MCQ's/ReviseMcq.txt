@@ -556,6 +556,7 @@ Answer: A) Script running, Output: Script running
 Explanation: The nice command sets priority, running script.js, which logs 'Script running'. The parent logs 'Output: Script running'. This tests OS process scheduling.
 
 28. What is the outcome of this thread deadlock simulation?
+
 const { Worker, isMainThread } = require('worker_threads');
 
 if (isMainThread) {
@@ -570,10 +571,15 @@ if (isMainThread) {
   });
 }
 
-A) Main waiting, Worker waiting (then hangs)B) Worker waiting, Main waitingC) TypeErrorD) No output
-Answer: A) Main waiting, Worker waiting (then hangs)Explanation: The main thread logs 'Main waiting', the worker logs 'Worker waiting', then deadlocks in an infinite loop. This tests OS thread deadlocks.
+A) Main waiting, Worker waiting (then hangs)
+B) Worker waiting, Main waiting
+C) TypeError
+D) No output
+Answer: A) Main waiting, Worker waiting (then hangs)
+Explanation: The main thread logs 'Main waiting', the worker logs 'Worker waiting', then deadlocks in an infinite loop. This tests OS thread deadlocks.
 
 29. What is logged in this file system lock?
+
 const fs = require('fs');
 
 fs.open('test.txt', 'wx', (err, fd) => {
@@ -587,8 +593,12 @@ fs.open('test.txt', 'wx', (err) => {
   console.log('Error:', err.code);
 });
 
-A) Error: EEXISTB) File locked (twice)C) TypeErrorD) No output
-Answer: A) Error: EEXISTExplanation: The 'wx' flag prevents opening an existing file, so the second open logs 'Error: EEXIST'. This tests OS file locking.
+A) Error: EEXIST
+B) File locked (twice)
+C) TypeError
+D) No output
+Answer: A) Error: EEXIST
+Explanation: The 'wx' flag prevents opening an existing file, so the second open logs 'Error: EEXIST'. This tests OS file locking.
 
 30. What is the outcome of this process resource limit?
 const { spawn } = require('child_process');
@@ -597,81 +607,10 @@ const child = spawn('node', ['-e', 'while(true) { console.log("Running"); }']);
 child.stdout.on('data', (data) => console.log('Output:', data.toString()));
 setTimeout(() => child.kill('SIGKILL'), 1000);
 
-A) Output: Running (multiple), then terminatesB) TypeErrorC) No outputD) Running (once)
-Answer: A) Output: Running (multiple), then terminatesExplanation: The child process logs 'Running' until killed after 1 second. The parent logs 'Output: Running'. This tests OS process termination.
+A) Output: Running (multiple), then terminates
+B) TypeError
+C) No output
+D) Running (once)
+Answer: A) Output: Running (multiple), then terminates
+Explanation: The child process logs 'Running' until killed after 1 second. The parent logs 'Output: Running'. This tests OS process termination.
 
-Databases (Questions 31–40)
-31. What is logged in this MongoDB index failure?
-const mongoose = require('mongoose');
-
-const userSchema = new Schema({ name: String });
-userSchema.index({ name: 1 }, { unique: true });
-const User = mongoose.model('User', userSchema);
-
-async function insert() {
-  await User.create({ name: 'John' });
-  await User.create({ name: 'John' });
-  console.log('Inserted');
-}
-insert().catch((err) => console.log('Error:', err.message));
-
-A) Error: E11000 duplicate key errorB) InsertedC) TypeErrorD) No output
-Answer: A) Error: E11000 duplicate key errorExplanation: The unique index on name prevents duplicate entries, logging 'Error: E11000 duplicate key error'. This tests MongoDB indexing.
-
-32. What is the outcome of this PostgreSQL query?
-const { Pool } = require('pg');
-
-const pool = new Pool({
-  user: 'user',
-  database: 'test',
-  password: 'pass',
-  port: 5432,
-  host: 'localhost',
-});
-
-pool.query('SELECT * FROM nonexistent_table', (err, res) => {
-  console.log(err ? 'Error: ' + err.message : res.rows);
-});
-
-A) Error: relation "nonexistent_table" does not existB) [] (empty rows)C) TypeErrorD) No output
-Answer: A) Error: relation "nonexistent_table" does not existExplanation: Querying a nonexistent table causes an error. This tests PostgreSQL query handling.
-
-33. What is logged in this MongoDB aggregation?
-const mongoose = require('mongoose');
-
-const userSchema = new Schema({ age: Number });
-const User = mongoose.model('User', userSchema);
-
-async function aggregate() {
-  await User.insertMany([{ age: 20 }, { age: 30 }]);
-  const result = await User.aggregate([{ $group: { _id: null, avgAge: { $avg: '$age' } } }]);
-  console.log(result[0].avgAge);
-}
-aggregate();
-
-A) 25B) TypeErrorC) undefinedD) No output
-Answer: A) 25Explanation: The aggregation computes the average age (25). This tests MongoDB aggregation pipelines.
-
-34. What is the outcome of this Redis cache miss?
-const redis = require('redis');
-const client = redis.createClient();
-
-client.on('error', (err) => console.log('Error:', err.message));
-
-async function getData() {
-  const value = await client.get('key');
-  console.log(value);
-}
-getData();
-
-A) nullB) Error: Connection refusedC) TypeErrorD) undefined
-Answer: A) nullExplanation: If the key doesn’t exist, client.get returns null. If Redis isn’t running, an error may occur. This tests Redis caching, relevant to your Redis queries (July 9, 2025).
-
-35. What is logged in this MongoDB connection timeout?
-const mongoose = require('mongoose');
-
-async function connect() {
-  try {
-    await mongoose.connect('mongodb://invalid-host/test', { serverSelectionTimeoutMS: 1000 });
-    console.log('Connected');
-  }
