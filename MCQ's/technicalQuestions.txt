@@ -478,29 +478,3 @@ Caching: Use Redis for frequent queries and Varnish for HTTP caching.
 Database optimization: Index frequently queried fields, use read replicas.
 Monitoring: Use tools like New Relic or Prometheus for performance tracking.
 
-
-
-
-Diagram (Text-based for simplicity):Client (React) <-> CDN <-> Load Balancer (NGINX)
-                   |
-                   v
-Node.js/Express (Clustered) <-> Redis (Caching)
-                   |
-                   v
-MongoDB (Sharded + Replica Sets)
-
-
-Interview Tip: Draw a diagram on a whiteboard (or describe it clearly), explain each component’s role, and discuss trade-offs (e.g., REST vs. GraphQL, sharding vs. replication). Mention monitoring and CI/CD for production readiness.
-
-
-
-
-Tips to Crack the Technical Round
-
-Explain Your Thought Process: Verbalize your approach before coding—outline the problem, discuss edge cases, and justify your solution.
-Write Clean Code: Use meaningful variable names, modularize code, and handle errors. Test your code mentally for edge cases.
-Know Trade-offs: For every solution (e.g., embedding vs. referencing in MongoDB), explain pros and cons to show depth.
-Practice System Design: Be ready to discuss scalability, caching, and database optimization, as these are common in senior MERN roles.
-Ask Clarifying Questions: If a question is vague, ask about requirements (e.g., “Should the API support pagination?”) to demonstrate thoroughness.
-Use Real-World Context: Relate answers to your projects (e.g., your Expense Tracker or Polling App) to show practical experience.
-Prepare for Follow-ups: Expect interviewers to ask “What if traffic increases 10x?” or “How would you secure this?” Be ready with scalable solutions.
