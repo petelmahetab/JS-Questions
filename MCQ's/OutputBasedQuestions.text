@@ -16,9 +16,10 @@ B) 0, 1
 C) 1, 2
 D) undefined, undefined  
 
-Answer: B) 0, 1Explanation: The inner function forms a closure, retaining access to count. The first call to counter() returns 0 and increments count to 1 (post-increment). The second call returns 1 and increments to 2. This tests closure and variable persistence.
+Answer: B) 0, 1 Explanation: The inner function forms a closure, retaining access to count. The first call to counter() returns 0 and increments count to 1 (post-increment). The second call returns 1 and increments to 2. This tests closure and variable persistence.
 
 2. Async Programming: What is the output of the following code?
+
 async function foo() {
   console.log('Start');
   await Promise.resolve('Middle');
@@ -32,7 +33,8 @@ B) Start, Outside, End
 C) Outside, Start, End
 D) End, Start, Outside  
 
-Answer: B) Start, Outside, EndExplanation: foo logs 'Start' synchronously. The await pauses the function, queuing 'End' as a microtask. console.log('Outside') runs synchronously after foo() is called, logging next. The microtask ('End') runs last. This tests async/await and the event loop.
+Answer: B) Start, Outside, End
+Explanation: foo logs 'Start' synchronously. The await pauses the function, queuing 'End' as a microtask. console.log('Outside') runs synchronously after foo() is called, logging next. The microtask ('End') runs last. This tests async/await and the event loop.
 
 3. Scope: What is the output of the following code?
 var x = 10;
@@ -41,7 +43,7 @@ function foo() {
   console.log(x);
 }
 foo();
-console.log(x);
+console.log(x);/ 
 
 A) 20, 10
 B) 10, 20
@@ -80,7 +82,7 @@ B) B, A
 C) A
 D) TypeError  
 
-Answer: A) A, BExplanation: The first .then logs 'A' and returns 'B'. The second .then logs 'B'. Promises execute sequentially, logging resolved values. This tests Promise chaining.
+Answer: A) A, B Explanation: The first .then logs 'A' and returns 'B'. The second .then logs 'B'. Promises execute sequentially, logging resolved values. This tests Promise chaining.
 
 6. Closures in Loops: What is the output of the following code?
 for (var i = 0; i < 3; i++) {

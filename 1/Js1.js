@@ -1,33 +1,43 @@
+const imgeDiv = document.querySelector('.Image-Container');
 
-//Get an Division or Element 
-const imgeDiv=document.querySelector('.Image-Container');
-const arrayURLImges=["https://picsum.photos/200/300?random=1","https://picsum.photos/200/300?random=2","https://picsum.photos/200/300?random=3","https://picsum.photos/200/300?random=6","https://picsum.photos/200/300?random=5"];
+const arrayURLImges = [
+    "https://picsum.photos/200/300?random=1",
+    "https://picsum.photos/200/300?random=2",
+    "https://picsum.photos/200/300?random=3",
+    "https://picsum.photos/200/300?random=6",
+    "https:picsum.photos/200/300?random=5"  // Broken URL
+];
 
-//Lets handle all URL using PROMISE.all Method
-//Here..Handle Images is the Function for handling the Promises.
-Promise.all(arrayURLImges.map(HandleImages))
-.then((img)=>{
-    img.forEach(i=>{
-        imgeDiv.appendChild(i);
-    })
+Promise.all(arrayURLImges.map(HandlePromise))
+.then((images) => {
+    images.forEach(img => imgeDiv.appendChild(img));
 })
-.catch(e=>console.log(e));
+.catch((e) => {
+    imgeDiv.innerHTML = `<p style="color:red; padding:20px;">
+        ❌ ${e.message}
+    </p>`;
+    console.error("Error:", e);
+});
 
-function HandleImages(src){
-    //it return an Promise for promise we have Reslove and Reject
-    return new Promise((res,rej)=>{
-   //take an Image object and set its width , height.
-   let img=new Image(300,400);
-   //onload is an Event for Successfully Loaded the Image object.
-    img.onload=function(){
-        //after loaded we get RESPONSE
-           res(img);
-    }
-    img.onerror=function(){
-        //after getting some Error our Promise will be REJECTED.
-        rej(new Error('Failed to load'+src));
-    }
-    
-    img.src=src;
-    })
+function HandlePromise(src) {
+    return new Promise((res, rej) => {
+        // ✅ Reject immediately if URL format is wrong
+        if (!src.match(/^https?:\/\//)) {
+            rej(new Error(`Invalid URL format (missing //): ${src}`));
+            return;
+        }
+
+        let img = new Image(300, 400);
+        
+        img.onload = () => {
+            if (img.naturalWidth === 0) {
+                rej(new Error(`Invalid image data: ${src}`));
+            } else {
+                res(img);
+            }
+        };
+        
+        img.onerror = () => rej(new Error(`Failed to load: ${src}`));
+        img.src = src;
+    });
 }

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>DSA via JS</title>
+
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+
+    h1 {
+      color: #00d8ff;
+    }
+
+    .section {
+      margin-bottom: 30px;
+      padding: 15px;
+      border: 1px solid #333;
+      border-radius: 10px;
+      background-color: #1e1e1e;
+    }
+
+    .question {
+      margin: 10px 0;
+      padding: 10px;
+      background-color: #2a2a2a;
+      border-radius: 6px;
+    }
+
+    .note {
+      color: #00ff9c;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 8px;
+      padding: 6px 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #00d8ff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0063d4;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🚀 DSA Practice (JavaScript)</h1>
+  <p class="note">👉 Open Console (F12) to see outputs</p>
+
+  <div class="section">
+    <h2>📌 Arrays</h2>
+
+
+    <div class="question">
+      1. Remove duplicates & return sorted unique elements as functions.
+      <br>
+      <input id="q1Input" placeholder="3,1,2,1,4,2">
+      <p id="q1Output"></p>
+      e.g [3,1,2,1,4,2]==> [1, 2, 3, 4]
+      <br><button onclick="runQ1()">Run</button>
+    </div>
+
+    <div class="question">
+      2. Find largest number without Math.max.
+      <br>
+      <input id="q2Input" placeholder="0,1,2...">
+      <p id="q2Output"></p>
+      eg.3, 7, 1, 9, 4 => 9
+      <br><button onclick="runQ2()">Run</button>
+    </div>
+
+    <div class="question">
+      3. Flatten nested array (any depth).
+      <br>
+      <input id="q2Input" placeholder="0,1,2...">
+      <p id="q2Output"></p>
+      eg.[3,7, 1, 9, 4 ]=> 9
+      <!-- <br><button onclick="runQ3()">Run</button> -->
+      <h4>Check in console directly.</h4>
+    </div>
+
+    <div class="question">
+      4. Frequency counter (count occurrences).
+      <br>
+      <input id="q4Input" placeholder="0,1,2,3,4...">
+      <p id="q4Output"></p>
+      e.g [1, 2, 2, 3, 3, 3], => { '1': 1, '2': 2, '3': 3 }
+      <br><button onclick="runQ4()">Run</button>
+    </div>
+
+    <div class="question">
+      5. Rotate array by k steps.
+      <br>
+      <input id="q5Input" placeholder="0,1,2,3,4...">
+      <input id="k" placeholder="K's value">
+      <p id="q5Output"></p>
+      e.g [1, 2, 3,4,5],k=[2] => [4,5,1,2,3]
+      <br><button onclick="runQ5()">Run</button>
+    </div>
+
+    <div class="question">
+      6. Intersection of two arrays
+      <br>
+      <input id="q6aInput" placeholder="First array element...">
+      <input id="q6bInput" placeholder="Second array element...">
+      <p id="q6Output"></p>
+      e.g [1, 2, 3,4],[4,2,9 ,3] => [2,3,4]
+      <br><button onclick="runQ6()">Run</button>
+    </div>
+
+    <div class="question">
+      7. Sum of array using reduce.
+      <br>
+      <input id="q7Input" placeholder="0,1,2...">
+      <p id="q7Output"></p>
+      console.log(sum([1, 2, 3, 4, 5])); // 15
+      <br><button onclick="runQ7()">Run</button>
+    </div>
+
+    <div class="question">
+      8. Chunk array into parts
+      <br>
+      <input id="q8aInput" placeholder="First array element...">
+      <input id="chnk" placeholder="Chunks...">
+      <p id="q8Output"></p>
+      console.log(chunk([1,2,3,4,5], 2)); // [[1,2],[3,4],[5]]
+      <br><button onclick="runQ8()">Run</button>
+    </div>
+  </div>
+
+  <script>
+
+    function solution(arr) {
+      const reverse = [...new Set(arr)].sort((a, b) => a - b);
+      return reverse.map(val => () => val);
+    }
+
+    function runQ1() {
+      const input = document.querySelector('#q1Input').value;
+      //convert that value(string) to array.
+      const arr = input.split(',').map(Number);
+      //Main Logic to complete that question.
+      const result = solution(arr).map(fun => fun())
+      console.log(result)
+    }
+
+
+
+    function runQ2() {
+      const input = document.querySelector('#q2Input').value;
+      //convert string to Array of numbers.
+      const arr = input.split(',').map(Number);
+
+      const result = arr.reduce((max, acc) => acc > max ? acc : max, arr[0]);
+      console.log(result)
+    }
+
+
+    function runQ3(arr) {
+      return arr.reduce((acc, cur) =>
+        acc.concat(Array.isArray(cur) ? runQ3(cur) : cur)
+        , [])
+    }
+
+    console.log(runQ3([[1, [2]], 3]))
+
+    function runQ4() {
+      const input = document.querySelector('#q4Input').value;
+      //string->arr
+      const arr = input.split(',').map(Number);
+
+      //actual logic and result
+      const result = arr.reduce((acc, val) => (
+        acc[val] = (acc[val] || 0) + 1, acc
+      ), {})
+      console.log("Q4 Output:", result)
+    }
+
+    function runQ5() {
+      //Get array and k
+      const input = document.querySelector('#q5Input').value;
+      const kInput = document.querySelector('#k').value;
+
+      //Convert String to Number.
+      const arr = input.split(',').map(Number);
+      let k = Number(kInput);
+
+      //Length of array and K value.
+      let n = arr.length;
+      k = k % n;
+
+      const result = [...arr.slice(n - k), ...arr.slice(0, (n - k))]
+      console.log(result)
+
+    }
+
+    function runQ6() {
+      //Get both array element 
+      const input1 = document.querySelector('#q6aInput').value;
+      const input2 = document.querySelector('#q6bInput').value;
+
+      //Convert string to array.
+      const arr1 = input1.split(',').map(Number);
+      const arr2 = input2.split(',').map(Number);
+
+      const setB = new Set(arr2);
+
+      const result = arr1.filter(val => setB.has(val));
+      console.log(result)
+    }
+
+
+    function runQ7() {
+      //Get values and convert.
+      const input = document.querySelector('#q7Input').value;
+
+      const arr = input.split(',').map(Number);
+
+      const result = arr.reduce((Acc, Val) => Acc + Val, 0);
+      console.log(result);
+    }
+
+    function runQ8() {
+      //get both Input and convert it into number.
+      const input = document.querySelector('#q8aInput').value;
+      const chunk = document.querySelector('#chnk').value;
+
+      const arr = input.split(',').map(Number);
+      const chunkSize = Number(chunk);
+
+
+      //Actual Logic
+  const result =(arr,chunkSize)=>{
+    let result=[];
+     for(let i=0;i<arr.length;i+=chunkSize){
+      result.push(arr.slice(i,i+chunkSize))
+     }
+     return result;
+  }
+  console.log(result(arr,chunkSize))
+    }
+  </script>
+
+</body>
+
+</html>
